@@ -4,7 +4,7 @@ set -e ; sudo ls &>/dev/null
 SP="$( cd "$(dirname "$0")" ; pwd -P )"
 
 PR="$1"; UR="$2"; 
-[ -z "$2" ] && echo "usage: void.sh <server hostname> <shared username>"
+[ -z "$2" ] && echo "use: void.sh <server hostname> <shared username>" && exit
 echo "server hostname: $PR";echo "shared username: $UR";echo -n "ready? >";read
 
 ## PACKAGES ## ------------------------------------------------------------- ##
