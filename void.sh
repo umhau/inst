@@ -7,8 +7,8 @@ PR="$1"; UR="$2"; echo "server hostname: $PR";echo "shared username: $UR"
 
 ## PACKAGES ## ------------------------------------------------------------- ##
 
-PK="$PK ntfs-3g linux-firmware "
-# PK="$PK linux-firmware-intel linux-firmware-network sublime-text3 "
+PK="$PK ntfs-3g linux-firmware linux-firmware-intel linux-firmware-network"
+# PK="$PK  sublime-text3 "
 # PK="$PK wpa_supplicant sublime-merge "
 PK="$PK xinit xorg st tmux htop curl nano nload i3 j4-dmenu-desktop i3lock feh"
 PK="$PK sct spacefm qdirstat gparted geany firefox xbindkeys gimp nomacs scrot"
