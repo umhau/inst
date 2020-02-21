@@ -35,7 +35,7 @@ mkdir -p /home/$UR/intimate/accounts/../recipes/../memories/../healthcare
 
 ## GRABS FROM PRIOR COMPUTER ## -------------------------------------------- ##
 
-mkdir -p .config/i3
+mkdir -p /home/$UR/.config/i3
 GB()                     { sudo rsync -ah --info=progress2 $UR@$IP:"$1" "$1"; }
 GB                                                          "/home/$UR/.bashrc"
 GB                                                          "/home/$UR/.nanorc"
