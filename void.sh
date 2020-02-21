@@ -2,27 +2,29 @@
 
 set -e
 SP="$( cd "$(dirname "$0")" ; pwd -P )"
-PR="$1"; UR="$2"; echo "server hostname: $PR";echo "shared username: $UR"
-# "usage: void.sh <server hostname> <shared username>"
+IP="$1"; UR="$2"; echo "server IP address: $IP";echo "shared username: $UR"
+# "usage: void.sh <server IP> <shared username>"
 
 ## PACKAGES ## ------------------------------------------------------------- ##
 
-PK="$PK ntfs-3g linux-firmware linux-firmware-intel linux-firmware-network"
-# PK="$PK  sublime-text3 "
-# PK="$PK wpa_supplicant sublime-merge "
+PK="$PK ntfs-3g linux-firmware "
+# PK="$PK linux-firmware-intel linux-firmware-network vscode"
 PK="$PK xinit xorg st tmux htop curl nano nload i3 j4-dmenu-desktop i3lock feh"
 PK="$PK sct spacefm qdirstat gparted geany firefox xbindkeys gimp nomacs scrot"
 PK="$PK deadbeef vlc x264 ffmpeg youtube-dl qbittorrent rofi xbanish"
-PK="$PK wpa_gui rsync void-repo-nonfree virtualbox-ose arandr vscode"
-PK="$PK zenmap maim qemu galculator chromium"
+PK="$PK wpa_gui wpa_supplicant rsync void-repo-nonfree virtualbox-ose arandr"
+PK="$PK sublime-text3 sublime-merge zenmap maim qemu galculator chromium"
 # PK="$PK xpdf macchanger i3status apl pandoc mirage inkscape hdparm"
 # PK="$PK alsa-utils deluge deluge-gtk syncthing syncthing-gtk autorandr"
 
-sudo xbps-install -Su; sudo xbps-install -Su; sudo xbps-install -Sy $PK
+sudo xbps-install -Su; sudo xbps-install -Su; sudo xbps-install -S $PK
 
 echo "exec i3"                                             > /home/$UR/.xinitrc
 
 # install items from system/scripts/tools/ ? 
+
+# qemu adjustments
+sudo usermod -aG kvm $UR; sudo modprobe kvm-intel 
 
 ## FOLDER STRUCTURE ## ----------------------------------------------------- ##
 
@@ -34,7 +36,7 @@ mkdir -p /home/$UR/intimate/accounts/../recipes/../memories/../healthcare
 
 ## GRABS FROM PRIOR COMPUTER ## -------------------------------------------- ##
 
-GB()                     { sudo rsync -ah --info=progress2 $UR@$PR:"$1" "$1"; }
+GB()                     { sudo rsync -ah --info=progress2 $UR@$IP:"$1" "$1"; }
 GB                                                          "/home/$UR/.bashrc"
 GB                                                          "/home/$UR/.nanorc"
 GB                                           "/home/$UR/.config/user-dirs.dirs"
