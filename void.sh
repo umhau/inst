@@ -55,7 +55,7 @@ GB                                                      "/home/$UR/.config/vlc"
 ## START DAEMONS ## -------------------------------------------------------- ##
 
 # also: smbd udevd rpcbind dhcpcd cupsd
-sudo ln -s /etc/sv/sshd /var/service/                                     # ssh
+# sudo ln -s /etc/sv/sshd /var/service/                                   # ssh
 sudo ln -s /etc/sv/acpid /var/service/            # acpi to get suspend working
 sudo ln -s /etc/sv/cupsd /var/service/                    # print server client
 sudo ln -s /etc/sv/nfs-server /var/service/                               # nfs
