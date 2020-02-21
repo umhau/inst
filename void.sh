@@ -8,12 +8,13 @@ PR="$1"; UR="$2"; echo "server hostname: $PR";echo "shared username: $UR"
 ## PACKAGES ## ------------------------------------------------------------- ##
 
 PK="$PK ntfs-3g linux-firmware "
-# PK="$PK linux-firmware-intel linux-firmware-network vscode"
+# PK="$PK linux-firmware-intel linux-firmware-network vscode sublime-text3 "
+# PK="$PK wpa_supplicant "
 PK="$PK xinit xorg st tmux htop curl nano nload i3 j4-dmenu-desktop i3lock feh"
 PK="$PK sct spacefm qdirstat gparted geany firefox xbindkeys gimp nomacs scrot"
 PK="$PK deadbeef vlc x264 ffmpeg youtube-dl qbittorrent rofi xbanish"
-PK="$PK wpa_gui wpa_supplicant rsync void-repo-nonfree virtualbox-ose arandr"
-PK="$PK sublime-text3 sublime-merge zenmap maim qemu galculator chromium"
+PK="$PK wpa_gui rsync void-repo-nonfree virtualbox-ose arandr"
+PK="$PK sublime-merge zenmap maim qemu galculator chromium"
 # PK="$PK xpdf macchanger i3status apl pandoc mirage inkscape hdparm"
 # PK="$PK alsa-utils deluge deluge-gtk syncthing syncthing-gtk autorandr"
 
