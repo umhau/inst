@@ -18,7 +18,7 @@ PK="$PK zenmap maim qemu galculator chromium"
 # PK="$PK xpdf macchanger i3status apl pandoc mirage inkscape hdparm"
 # PK="$PK alsa-utils deluge deluge-gtk syncthing syncthing-gtk autorandr"
 
-sudo xbps-install -Su; sudo xbps-install -Su; sudo xbps-install -S $PK
+sudo xbps-install -Su; sudo xbps-install -Su; sudo xbps-install -Sy $PK
 
 echo "exec i3"                                             > /home/$UR/.xinitrc
 
