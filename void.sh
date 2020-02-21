@@ -1,5 +1,5 @@
 #!/bin/bash
-set -e ; sudo ls &>/dev/null
+set -e ; sudo su
 
 SP="$( cd "$(dirname "$0")" ; pwd -P )"
 
