@@ -6,6 +6,8 @@ IP="$1"; UR="$2"; echo "server IP address: $IP";echo "shared username: $UR"
 # "usage: void.sh <server IP> <shared username>"
 
 ## PACKAGES ## ------------------------------------------------------------- ##
+# this selection is based on the gcc compiler collection, and will give errors 
+# if used with the musli version
 
 PK="$PK ntfs-3g linux-firmware linux-firmware-intel linux-firmware-network vscode"
 PK="$PK xinit xorg st tmux htop curl nano nload i3 j4-dmenu-desktop i3lock feh"
