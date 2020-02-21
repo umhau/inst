@@ -1,23 +1,25 @@
 #!/bin/bash
 set -e ; sudo ls &>/dev/null
-# [ "$EUID" -ne 0 ] && echo "please run as root" && exit
 
 SP="$( cd "$(dirname "$0")" ; pwd -P )"
-echo "enter hostname of similar system to download configs from > "; read PR;
-echo "enter username shared between this computer and the prior > "; read UR;
+
+PR="$1"; UR="$2"; 
+[ -z "$2" ] && echo "usage: void.sh <server hostname> <shared username>"
+echo "server hostname: $PR";echo "shared username: $UR";echo -n "ready? >";read
 
 ## PACKAGES ## ------------------------------------------------------------- ##
 
-PK="$PK ntfs-3g linux-firmware linux-firmware-intel linux-firmware-network"
+PK="$PK ntfs-3g linux-firmware "
+# PK="$PK linux-firmware-intel linux-firmware-network vscode"
 PK="$PK xinit xorg st tmux htop curl nano nload i3 j4-dmenu-desktop i3lock feh"
 PK="$PK sct spacefm qdirstat gparted geany firefox xbindkeys gimp nomacs scrot"
-PK="$PK deadbeef vlc x264 ffmpeg youtube-dl vscode qbittorrent rofi xbanish"
+PK="$PK deadbeef vlc x264 ffmpeg youtube-dl qbittorrent rofi xbanish"
 PK="$PK wpa_gui wpa_supplicant rsync void-repo-nonfree virtualbox-ose arandr"
 PK="$PK sublime-text3 sublime-merge zenmap maim qemu galculator chromium"
 # PK="$PK xpdf macchanger i3status apl pandoc mirage inkscape hdparm"
 # PK="$PK alsa-utils deluge deluge-gtk syncthing syncthing-gtk autorandr"
 
-sudo xbps-install -Su; sudo xbps-install -Su; sudo xbps-install -S "$PK"
+sudo xbps-install -Su; sudo xbps-install -Su; sudo xbps-install -S $PK
 
 echo "exec i3"                                             > /home/$UR/.xinitrc
 
