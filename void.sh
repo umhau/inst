@@ -22,8 +22,8 @@ echo "exec i3"                                             > /home/$UR/.xinitrc
 
 # install items from system/scripts/tools/ ? 
 
-# qemu adjustments
-sudo usermod -aG kvm $UR; sudo modprobe kvm-intel 
+# qemu adjustments - make sure BIOS is set up for it
+# sudo usermod -aG kvm $UR; sudo modprobe kvm-intel 
 
 ## FOLDER STRUCTURE ## ----------------------------------------------------- ##
 
