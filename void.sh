@@ -1,11 +1,9 @@
 #!/bin/bash
+
 set -e
-
 SP="$( cd "$(dirname "$0")" ; pwd -P )"
-
-PR="$1"; UR="$2"; 
-# [ -z "$2" ] && echo "usage: void.sh <server hostname> <shared username>" && exit 1
-echo "server hostname: $PR";echo "shared username: $UR";echo -n "ready? >";read
+PR="$1"; UR="$2"; echo "server hostname: $PR";echo "shared username: $UR"
+# "usage: void.sh <server hostname> <shared username>"
 
 ## PACKAGES ## ------------------------------------------------------------- ##
 
