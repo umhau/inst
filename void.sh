@@ -1,10 +1,10 @@
 #!/bin/bash
-set -e ; sudo su
+set -e
 
 SP="$( cd "$(dirname "$0")" ; pwd -P )"
 
 PR="$1"; UR="$2"; 
-[ -z "$2" ] && echo "use: void.sh <server hostname> <shared username>" && exit
+# [ -z "$2" ] && echo "usage: void.sh <server hostname> <shared username>" && exit 1
 echo "server hostname: $PR";echo "shared username: $UR";echo -n "ready? >";read
 
 ## PACKAGES ## ------------------------------------------------------------- ##
