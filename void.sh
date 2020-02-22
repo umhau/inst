@@ -38,20 +38,23 @@ mkdir -p /home/$UR/intimate/accounts/../recipes/../memories/../healthcare
 ## GRABS FROM PRIOR COMPUTER ## -------------------------------------------- ##
 
 mkdir -p /home/$UR/.config/i3
-GB()                     { sudo rsync -ah --info=progress2 $UR@$IP:"$1" "$1"; }
+GB()                                                 { scp $UR@$IP:"$1" "$1"; }
 GB                                                          "/home/$UR/.bashrc"
 GB                                                          "/home/$UR/.nanorc"
-GB                                           "/home/$UR/.config/user-dirs.dirs"
-GB                                                "/home/$UR/.config/i3/config"
-GB                                                   "/home/$UR/.i3status.conf"
-GB                                                              "/etc/rc.local"
-GB                                    "/etc/wpa_supplicant/wpa_supplicant.conf"
 GB                                         "/home/$UR/system/wallpaper/current"
+GB                            "/home/$UR/system/wallpaper/wallpaper_changer.sh"
 GB                                                           "/home/$UR/.fonts"
 GB                                                   "/home/$UR/system/scripts"
 GB                                                  "/home/$UR/.config/gtk-3.0"
 GB                                                  "/home/$UR/.config/gtk-2.0"
 GB                                                      "/home/$UR/.config/vlc"
+GB                                           "/home/$UR/.config/user-dirs.dirs"
+GB                                                "/home/$UR/.config/i3/config"
+GB                                                   "/home/$UR/.i3status.conf"
+
+GB()                                            { sudo scp $UR@$IP:"$1" "$1"; }
+GB                                                              "/etc/rc.local"
+GB                                    "/etc/wpa_supplicant/wpa_supplicant.conf"
 
 ## START DAEMONS ## -------------------------------------------------------- ##
 
