@@ -15,6 +15,10 @@
 # on external devices, like the personalstorage server. That should be a 
 # separate config dedicated to setting up a device with that server.
 
+## STATUS CHECK ## --------------------------------------------------------- ##
+
+if tty | grep -q 'tty1'; then echo "use tty2!"; exit; fi
+
 ## VARIABLES ## ------------------------------------------------------------ ##
 
 NAShostname="personalstorage"
@@ -187,6 +191,8 @@ sudo install -v s/i3lock-mm /usr/local/bin/;
 sudo chmod -v +x /usr/local/bin/i3lock-mm
 mkdir -pv $HOME/system/wallpaper/lockscreens/
 cp -v s/lockscreen.surf.png $HOME/system/wallpaper/lockscreens/surf.png
+
+sudo chown -R `whoami`:`whoami` $HOME
 
 mkdir -pv $HOME/.config/gtk-3.0/; G3B=$HOME/.config/gtk-3.0/bookmarks
 echo "file:///home/`whoami`/libraries libraries"                          > $G3B
