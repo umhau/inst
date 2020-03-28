@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<actions>
+<action>
+	<icon>utilities-terminal</icon>
+	<name>Open Terminal Here</name>
+	<unique-id>1582874687407213-1</unique-id>
+	<command>exo-open --working-directory %f --launch TerminalEmulator</command>
+	<description>Example for a custom action</description>
+	<patterns>*</patterns>
+	<startup-notify/>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>compress to tar.gz</name>
+	<unique-id>1583029765316572-1</unique-id>
+	<command>tar -czvf %f.tar.gz %f</command>
+	<description>compress to tar.gz</description>
+	<patterns>*</patterns>
+	<directories/>
+</action>
+<action>
+	<icon></icon>
+	<name>unzip</name>
+	<unique-id>1583030184833184-2</unique-id>
+	<command>unzip %f</command>
+	<description>extract .zip file</description>
+	<patterns>*.zip</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>extract</name>
+	<unique-id>1583106103056295-3</unique-id>
+	<command>gunzip %f</command>
+	<description>extract using gzip</description>
+	<patterns>*.gz</patterns>
+	<other-files/>
+</action>
+</actions>

@@ -1,0 +1,24 @@
+# man acpid
+
+# The action value is a commandline, which will be invoked via /bin/sh
+# whenever an event matching the rule in question occurs.  The
+# commandline may include shell-special characters, and they will be
+# preserved.  The only special characters in an action value are "%"
+# escaped.  The string "%e" will be replaced by the literal text of the
+# event for which the action was invoked.  This string may contain
+# spaces, so the commandline must take care to quote the "%e" if it wants
+# a single token.  The string "%%" will be replaced by a literal "%".
+# All other "%" escapes are reserved, and will cause a rule to not load.
+
+# This feature allows multiple rules to be defined for the same event
+# (though no ordering is guaranteed), as well as one rule to be defined
+# for multiple events.  To force acpid to reload the rule configuration,
+# send it a SIGHUP.
+
+event=ibm/hotkey LEN0068:00 00000080 00004010
+action=/usr/bin/thinkpad-dock-hook on --via-hook acpi1_on
+
+
+            # adjust the displays and resolution
+            autorandr -c
+            xrandr --dpi 96

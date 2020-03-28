@@ -1,0 +1,4 @@
+# src: https://hackaday.com/2009/09/18/how-to-write-udev-rules/
+# udevadm info -a -p $(udevadm info -q path -n /dev/ttyUSB0)
+
+KERNELS=="ttyUSB0", DRIVERS=="pl2303", SUBSYSTEMS=="usb-serial", ATTRS{port_number}=="0", RUN+="/usr/local/bin/inputattach -mman4 /dev/ttyUSB0"
