@@ -1,8 +1,19 @@
 #!/bin/bash
 
+# Do NOT run this script as root. It depends on using $HOME to put things where
+# they go, and that WILL mess it up.
+
 # you MUST be logged in at tty2, NOT tty1, when this is run, due to the process
 # of installing the autologin system. It messes with what the tty1 does.
 # stop the script with ctrl-z
+
+# TODO: add a check whether I'm in tty1 or tty2. 
+
+# NOTE: I don't know if the musl edition of void can do what I need.
+
+# TODO: for future-proofing, separate out the parts of the script that depend 
+# on external devices, like the personalstorage server. That should be a 
+# separate config dedicated to setting up a device with that server.
 
 ## VARIABLES ## ------------------------------------------------------------ ##
 
@@ -18,7 +29,7 @@ wifidriver="nl80211"
 sudo vkpurge rm all       # purge old kernels: docs.voidlinux.org/config/kernel.html
 
 sudo xbps-install -Su; sudo xbps-install -Su
-sudo xbps-install -S void-repo-nonfree void-repo-multilib-nonfree void-repo-multilib
+sudo xbps-install -Sy void-repo-nonfree void-repo-multilib-nonfree void-repo-multilib
 
 declare -a PK=(\
 linux-firmware linux-firmware-intel linux-firmware-network qt5ct fuse-sshfs \
@@ -28,7 +39,7 @@ sct qdirstat gparted firefox xbindkeys gimp nomacs scrot zenity  \
 deadbeef vlc x264 ffmpeg youtube-dl qbittorrent rofi xbanish vim \
 wpa_gui wpa_supplicant rsync virtualbox-ose arandr font-spleen vscode \
 sublime-text3 sublime-merge zenmap maim qemu galculator chromium xpdf \
-FeatherPad i3status unzip unrar p7zip font-awesome5 cifs-utils  \
+FeatherPad i3status unzip unrar p7zip font-awesome5 cifs-utils gcc \
 ntfs-3g wireless_tools imagemagick nfs-utils breeze-snow-cursor-theme \
 )
 
@@ -104,7 +115,7 @@ INSTALL $TP                                   "$HOME/.config/user-dirs.defaults"
 [ ! -f /etc/fuse.conf.bak ] && sudo cp /etc/fuse.conf /etc/fuse.conf.bak
 echo "user_allow_other" | sudo tee /etc/fuse.conf # required for allow_root
 
-CONFIG=$HOME/.ssh/config
+mkdir -pv $HOME/.ssh; CONFIG=$HOME/.ssh/config
 echo "Host $NAShostname"                                               > $CONFIG
 echo "HostName $NAShostname"              >> $CONFIG # alternately an IP address
 echo "User `whoami`"                                                  >> $CONFIG
@@ -120,7 +131,7 @@ INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
 INSTALL s/nanorc                                                 "$HOME/.nanorc"
 INSTALL s/bashrc                                                 "$HOME/.bashrc"
 INSTALL  s/xinitrc                                              "$HOME/.xinitrc"
-[ -d s/fonts ] && cp -v s/fonts/*                                "$HOME/.fonts/"
+mkdir -pv $HOME/.fonts; [ -d s/fonts ] && cp -v s/fonts/*        "$HOME/.fonts/"
 INSTALL  s/bash_profile                                    "$HOME/.bash_profile"
 INSTALL  s/i3config                                    "$HOME/.config/i3/config"
 INSTALL  s/i3status.conf                                  "$HOME/.i3status.conf"
@@ -161,7 +172,7 @@ fi
 sudo install -Dv s/gtk2.ini          "$HOME/.config/gtk-2.0/gtkfilechooser.ini"
 sudo install -Dv s/gtk3.settings.ini       "$HOME/.config/gtk-3.0/settings.ini"
 sudo install -Dv s/gtkrc2                                    "$HOME/.gtkrc-2.0"
-sudo install -Dv s/vlcrc                                   "$HOME/.config/vlc/"
+mkdir -pv $HOME/.config/vlc; sudo install -Dv s/vlcrc      "$HOME/.config/vlc/"
 sudo install -Dv s/wallpaper.sh   "$HOME/system/wallpaper/wallpaper_changer.sh"
 
 # if the network drive providing the wallpaper source is available, use it
@@ -177,7 +188,7 @@ sudo chmod -v +x /usr/local/bin/i3lock-mm
 mkdir -pv $HOME/system/wallpaper/lockscreens/
 cp -v s/lockscreen.surf.png $HOME/system/wallpaper/lockscreens/surf.png
 
-G3B=$HOME/.config/gtk-3.0/bookmarks
+mkdir -pv $HOME/.config/gtk-3.0/; G3B=$HOME/.config/gtk-3.0/bookmarks
 echo "file:///home/`whoami`/libraries libraries"                          > $G3B
 echo "file:///home/`whoami`/intimate intimate"                           >> $G3B
 echo "file:///home/`whoami`/system system"                               >> $G3B
