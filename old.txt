@@ -9,7 +9,7 @@
 # of installing the autologin system. It messes with what the tty1 does.
 # stop the script with ctrl-z
 
-# TODO: the disp function DOES NOT WORK.
+# NOTE: I don't know if the musl edition of void can do what I need.
 
 # TODO: for future-proofing, separate out the parts of the script that depend 
 # on external devices, like the personalstorage server. That should be a 
@@ -20,8 +20,7 @@
 # up first?  Make install.sh the last thing you run?
 
 # TODO: add a command line option for whether I plan to use wifi.  Rather not
-# install and turn on wpa_supplicant if the computer will never use it. This 
-# would correspond to checking if I'm installing to a desktop or not.
+# install and turn on wpa_supplicant if the computer will never use it.
 
 # TODO: put most of the information on a second tty.  errors on one, verbosity
 # on another.  1>/dev/tty3, 2>/dev/tty4, etc.
@@ -40,12 +39,15 @@ if tty | grep -q 'tty1'; then echo "use tty2!"; exit; fi
 NAShostname="personalstorage"
 wifidev="wlp3s0"
 wifidriver="nl80211"
-
+# IFDIR() {}
+# IFFILE() {}
+# IFLINE() { if ! grep --quiet "/usr/bin/reboot" /etc/sudoers }
 INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
 
 ## PACKAGE INSTALL ## ------------------------------------------------------ ##
 
-sudo vkpurge rm all  # purge old kernels: docs.voidlinux.org/config/kernel.html
+sudo vkpurge rm all       # purge old kernels: docs.voidlinux.org/config/kernel.html
+
 sudo xbps-install -Su; sudo xbps-install -Su
 sudo xbps-install -Sy void-repo-nonfree void-repo-multilib-nonfree void-repo-multilib
 
@@ -61,7 +63,7 @@ FeatherPad i3status unzip unrar p7zip font-awesome5 cifs-utils gcc \
 ntfs-3g wireless_tools nfs-utils breeze-snow-cursor-theme Thunar \
 cups-filters \                          # this allows installing local printers
 ImageMagick \                 # needed for the improved lock screen to function
-intel-ucode \                              # might help with external monitors?
+intel-ucode \   		           # might help with external monitors?
 texlive-bin \   # provides pdfpages, so that the print_efficiently scripts work
 )
 
@@ -72,7 +74,7 @@ for package in "${PK[@]}"; do sudo xbps-install -y "$package"; done
 sudo usermod -aG kvm `whoami`; sudo modprobe -v kvm-intel    # qemu adjustments
 
 ## FOLDER STRUCTURE ## ----------------------------------------------------- ##
-# update xdg directories and gtk bookmarks when these change
+# update xdg directories when these change
 
 mkdir -vp $HOME/system
 mkdir -vp $HOME/system/software
@@ -117,20 +119,6 @@ echo "XDG_DOWNLOAD_DIR=\"$HOME/unsorted\""                                >> $TP
 echo "XDG_DESKTOP_DIR=\"$HOME/unsorted\""                                 >> $TP
 sudo install -Dv $TP                               "/etc/xdg/user-dirs.defaults"
 INSTALL $TP                                   "$HOME/.config/user-dirs.defaults"
-
-# set up bookmarks
-sudo chown -R `whoami`:`whoami` $HOME
-mkdir -pv $HOME/.config/gtk-3.0/; G3B=$HOME/.config/gtk-3.0/bookmarks
-echo "file:///home/`whoami`/unsorted unsorted"                           >> $G3B
-echo "file:///home/`whoami`/libraries libraries"                          > $G3B
-echo "file:///home/`whoami`/private private"                             >> $G3B
-echo "file:///home/`whoami`/system system"                               >> $G3B
-echo "file:///home/`whoami`/amusant amusant"                             >> $G3B
-echo "file:///network/libraries  libraries"                             >> $G3B
-echo "file:///network/intimate  intimate"                               >> $G3B
-echo "file:///network/system  system"                                   >> $G3B
-echo "file:///network/amusant  amusant"                                 >> $G3B
-echo "file:///network/settings  settings"                               >> $G3B
 
 ## DAEMONS INITIALIZATION ## ----------------------------------------------- ##
 
@@ -180,7 +168,8 @@ INSTALL  s/i3status.conf                                  "$HOME/.i3status.conf"
 sudo install -Dv s/acpi_handler.sh                        "/etc/acpi/handler.sh"
 sudo install -Dv s/display_configuration.sh                "/usr/local/bin/disp"
 sudo install -Dv s/mountnetworkdrives.sshfs.sh                 "/usr/local/bin/"
-INSTALL s/thunarcustomactions.xml                 "$HOME/.config/Thunar/uca.xml"
+sudo install -Dv s/thunarcustomactions.xml        "$HOME/.config/Thunar/uca.xml"
+[ ! -f /etc/cups/cups-files.conf.bak ] && sudo cp /etc/cups/cups-files.conf /etc/cups/cups-files.conf.bak
 sudo install -Dv s/cups-files.conf                   "/etc/cups/cups-files.conf"
 sudo install -Dv s/serialmouseconfig.sh    "/usr/local/bin/serialmouseconfig.sh"
 
@@ -201,6 +190,7 @@ if [ -d /var/service/agetty-tty1 ]; then
     echo "GETTY_ARGS=\"--autologin `whoami` --noclear\""     | sudo tee    $CONF
     echo "BAUD_RATE=38400"                                   | sudo tee -a $CONF
     echo "TERM_NAME=linux"                                   | sudo tee -a $CONF
+
     sudo rm -v /var/service/agetty-tty1
     sudo ln -sv /etc/sv/agetty-autologin-tty1 /var/service
 fi
@@ -247,5 +237,19 @@ sudo install -v s/i3lock-mm /usr/local/bin/;
 sudo chmod -v +x /usr/local/bin/i3lock-mm
 mkdir -pv $HOME/system/wallpaper/lockscreens/
 cp -v s/lockscreen.surf.png $HOME/system/wallpaper/lockscreens/surf.png
+
+sudo chown -R `whoami`:`whoami` $HOME
+
+mkdir -pv $HOME/.config/gtk-3.0/; G3B=$HOME/.config/gtk-3.0/bookmarks
+echo "file:///home/`whoami`/libraries libraries"                          > $G3B
+echo "file:///home/`whoami`/private private"                             >> $G3B
+echo "file:///home/`whoami`/system system"                               >> $G3B
+echo "file:///home/`whoami`/amusant amusant"                             >> $G3B
+echo "file:///home/`whoami`/unsorted unsorted"                           >> $G3B
+echo "file:///network/libraries  libraries"                             >> $G3B
+echo "file:///network/intimate  intimate"                               >> $G3B
+echo "file:///network/system  system"                                   >> $G3B
+echo "file:///network/amusant  amusant"                                 >> $G3B
+echo "file:///network/settings  settings"                               >> $G3B
 
 echo "done. press enter to reboot now. > "; read; sudo reboot

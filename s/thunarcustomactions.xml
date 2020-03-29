@@ -21,7 +21,7 @@
 </action>
 <action>
 	<icon></icon>
-	<name>unzip</name>
+	<name>extract .zip</name>
 	<unique-id>1583030184833184-2</unique-id>
 	<command>unzip %f</command>
 	<description>extract .zip file</description>
@@ -30,11 +30,29 @@
 </action>
 <action>
 	<icon></icon>
-	<name>extract</name>
+	<name>extract .gz</name>
 	<unique-id>1583106103056295-3</unique-id>
 	<command>gunzip %f</command>
 	<description>extract using gzip</description>
 	<patterns>*.gz</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>print_efficiently</name>
+	<unique-id>1585430323694420-1</unique-id>
+	<command>print_efficiently_quickly.sh %f</command>
+	<description>print 4 pages on each side, 1 print job per sheet, to the default brother printer</description>
+	<patterns>*.pdf</patterns>
+	<other-files/>
+</action>
+<action>
+	<icon></icon>
+	<name>extract .tar.gz</name>
+	<unique-id>1585431947336200-2</unique-id>
+	<command>tar xvzf %f</command>
+	<description></description>
+	<patterns>*tar.gz</patterns>
 	<other-files/>
 </action>
 </actions>
