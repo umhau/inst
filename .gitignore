@@ -2,4 +2,6 @@ s/wpa_supplicant.conf
 .Trash*
 ubuntu
 wallpaper
+*swp
+s/*swp
 
