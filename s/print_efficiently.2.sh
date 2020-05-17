@@ -1,24 +1,46 @@
 #!/bin/bash
 
+# VERSION 2
+
 ## EXAMPLES
 # taken from https://www.ctan.org/tex-archive/support/pdfjam
 
 # Example 1: Batch 2-upping of documents
-# Consider converting each of two documents to a side-by-side "2-up" format. Since we want the two documents to be processed separately, we'll use the --batch option:
-# pdfjam --batch --nup 2x1 --suffix 2up --landscape file1.pdf file2.pdf
-# This will produce new files file1-2up.pdf and file2-2up.pdf in the current working directory.
+# Consider converting each of two documents to a side-by-side "2-up" format. 
+# Since we want the two documents to be processed separately, we'll use the 
+# --batch option:
+# 
+#       pdfjam --batch --nup 2x1 --suffix 2up --landscape file1.pdf file2.pdf
+#
+# This will produce new files file1-2up.pdf and file2-2up.pdf in the current 
+# working directory.
 
 # Example 2: Merging pages from 2 documents
-# Suppose we want a single new document which puts together selected pages from two different files:
-# pdfjam file1.pdf '{},2-' file2.pdf '10,3-6' --outfile ../myNewFile.pdf
-# The new file myNewFile.pdf, in the parent directory of the current one, contains an empty page, followed by all pages of file1.pdf except the first, followed by pages 10, 3, 4, 5 and 6 from file2.pdf.
-# The resulting PDF page size will be whatever is the default paper size for you at your site. If instead you want to preserve the page size of (the first included page from) file1.pdf, use the option --fitpaper true.
-# All pages in an output file from pdfjam will have the same size and orientation. For joining together PDF files while preserving different page sizes and orientations, pdfjam is not the tool to use.
+# Suppose we want a single new document which puts together selected pages from 
+# two different files:
+# 
+#      pdfjam file1.pdf '{},2-' file2.pdf '10,3-6' --outfile ../myNewFile.pdf
+# 
+# The new file myNewFile.pdf, in the parent directory of the current one, 
+# contains an empty page, followed by all pages of file1.pdf except the first, 
+# followed by pages 10, 3, 4, 5 and 6 from file2.pdf.
+# The resulting PDF page size will be whatever is the default paper size for you
+# at your site. If instead you want to preserve the page size of (the first 
+# included page from) file1.pdf, use the option --fitpaper true.
+# All pages in an output file from pdfjam will have the same size and 
+# orientation. For joining together PDF files while preserving different page 
+# sizes and orientations, pdfjam is not the tool to use.
 
 # Example 6: Trimming pages; and piped output
-# Suppose we want to trim the pages of our input file prior to n-upping. This can be done by using a pipe:
-# pdfjam myfile.pdf --trim '1cm 2cm 1cm 2cm' --clip true --outfile /dev/stdout | pdfjam --nup 2x1 --frame true --outfile myoutput.pdf
-# The --trim option specifies an amount to trim from the left, bottom, right and top sides respectively; to work as intended here it needs also --clip true. These (i.e., trim and clip) are in fact options to LaTeX's \includegraphics command (in the standard graphics package).
+# Suppose we want to trim the pages of our input file prior to n-upping. This 
+# can be done by using a pipe:
+#
+#       pdfjam myfile.pdf --trim '1cm 2cm 1cm 2cm' --clip true --outfile /dev/stdout | pdfjam --nup 2x1 --frame true --outfile myoutput.pdf
+# 
+# The --trim option specifies an amount to trim from the left, bottom, right and
+# top sides respectively; to work as intended here it needs also --clip true. 
+# These (i.e., trim and clip) are in fact options to LaTeX's \includegraphics 
+# command (in the standard graphics package).
 
 ## EXTENSION: booklet printing
 # # install dependency (700mb): texlive-extra-utils
@@ -28,8 +50,26 @@
 
 # set -e
 
+# TODO: be able to call this from anywhere - already possible?
+
 infile="$1"; if [ ! -f "$infile" ]; then echo "file not found! exiting.";exit;fi
 outfile="$infile.`date "+%Y.%m.%d.%H.%M.%S"`.pdf"
+trimfile="$infile.`date "+%Y.%m.%d.%H.%M.%S"`.TRIMMED.pdf"
+
+read -p "trim document pages? y/n. [n]: " trimbool; trimbool=${trimbool:-n}
+
+if [ "$trimbool" == 'y' ]; then
+    echo -e "\tenter page trim, in centimeters: e.g., '1cm 2cm 1cm 2cm'. Measurements"
+    echo -e "\tcorrespond to the left, bottom, right and top sides respectively. "
+    echo -ne "\tEnter page trim (MUST use single quotes) > "
+    read trimnumbers
+    
+    pdfjam "$infile" --no-tidy --trim "$trimnumbers" --clip true --outfile "$trimfile"
+    infile="$trimfile"
+    
+else
+    pagetrim=""
+fi
 
 read -p "Remove pages from the document? y/n. [n]: " rp_bool; rp_bool=${rp_bool:-n}
 
@@ -41,19 +81,6 @@ if [ "$rp_bool" == 'y' ]; then
 else
     pagerange=" - "
 fi
-
-# read -p "trim document pages? y/n. [n]: " trimbool; trimbool=${trimbool:-n}
-
-# if [ "$trimbool" == 'y' ]; then
-#     echo -e "\tenter page trim, in centimeters: e.g., '1cm 2cm 1cm 2cm'. Measurements"
-#     echo -e "\tcorrespond to the left, bottom, right and top sides respectively. "
-#     echo -ne "\tEnter page trim (do not use quotes) > "
-#     read trimnumbers
-#     trimnumbers=\'$trimnumbers\'
-#     pagetrim=" --trim $trimnumbers --clip true "
-# else
-#     pagetrim=""
-# fi
 
 # echo "$infile --> $outfile"
 

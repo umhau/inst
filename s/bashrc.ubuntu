@@ -1,0 +1,27 @@
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+alias ls='ls --color=auto'
+PS1='[\u@\h \W]\$ '
+
+HISTFILESIZE=100000
+
+alias q 'apt-cache search . | grep '
+alias i='sudo apt install '
+alias u='apt update && sudo apt upgrade '
+alias r='sudo apt remove '
+alias p3='python3 '
+alias ydl='youtube-dl '
+alias ymdl='youtube-dl -x '
+alias wget='wget --user-agent="Mozilla" '
+alias m='apropos '
+alias f='find / 2>/dev/null | grep '
+alias hlp='grep alias ~/.bashrc'
+
+function mc { mkdir -p "$1"; cd "$1"; }
+function b { grep -a "$1" ~/.bash_history; }
+
+# save bash history in tmux shells (https://askubuntu.com/a/339925)
+export HISTCONTROL=ignoredups:erasedups
+shopt -s histappend
+export PROMPT_COMMAND="history -a; history -c; history -r; $PROMPT_COMMAND"

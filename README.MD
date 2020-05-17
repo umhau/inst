@@ -9,19 +9,22 @@ To perform a full system configuration, run:
 
 # TODO
 
-Many of these things are discussed on the void wiki. https://wiki.voidlinux.org/Post_Installation
+Many of these things are discussed on the void wiki. 
+https://wiki.voidlinux.org/Post_Installation
 
-## pretty startup
-[X] autologin with https://github.com/jsumners/autox & https://wiki.voidlinux.org/Automatic_Login_to_Graphical_Environment
-[X] upon login, activate screen lock: https://github.com/ShikherVerma/i3lock-multimonitor.git
-[X] make screen lock attractive-looking
-[X] this process should also allow the computer to restart while connected to external displays
+## installation
+[ ] disp function does not work
+[ ] separate script to configure wifi stuff, so that I can avoid it on desktop.
+[ ] put most of the information on a second tty.  errors on one, verbosity on 
+    another.  1>/dev/tty3, 2>/dev/tty4, etc.
+[ ] install a proper ntp daemon. See: https://wiki.voidlinux.org/NTP
+
 
 ## file organization
 [X] automount folders into /network
 [ ] copy files from AS_VX HDDs to NAS
 [X] adjust folders: downloads,screenshots,desktop,documents,pictures -> 'unsorted'
-[ ] make ~/.i3/ and put all system management scripts in there.
+[ ] make system/scripts/i3/ and put all system management scripts in there.
 
 ## interface improvement
 [X] fix themes and appearance (install packages, config, and extract configs)

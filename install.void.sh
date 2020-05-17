@@ -45,92 +45,25 @@ INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
 
 ## PACKAGE INSTALL ## ------------------------------------------------------ ##
 
-sudo vkpurge rm all  # purge old kernels: docs.voidlinux.org/config/kernel.html
-sudo xbps-install -Su; sudo xbps-install -Su
-sudo xbps-install -Sy void-repo-nonfree void-repo-multilib-nonfree void-repo-multilib
+# purge old kernels: docs.voidlinux.org/config/kernel.html
+sudo vkpurge rm all
 
-declare -a PK=(\
-linux-firmware linux-firmware-intel linux-firmware-network qt5ct fuse-sshfs \
-xorg-minimal xorg-fonts lxappearance faenza-icon-theme breeze-gtk \
-xfe xinit st tmux htop curl nano nload i3 j4-dmenu-desktop i3lock feh \
-sct qdirstat gparted firefox xbindkeys gimp nomacs scrot zenity  \
-deadbeef vlc x264 ffmpeg youtube-dl qbittorrent rofi xbanish vim \
-wpa_gui wpa_supplicant rsync virtualbox-ose arandr font-spleen vscode \
-sublime-text3 sublime-merge zenmap maim qemu galculator chromium xpdf \
-FeatherPad i3status unzip unrar p7zip font-awesome5 cifs-utils gcc \
-ntfs-3g wireless_tools nfs-utils breeze-snow-cursor-theme Thunar \
-cups-filters \                          # this allows installing local printers
-ImageMagick \                 # needed for the improved lock screen to function
-intel-ucode \                              # might help with external monitors?
-texlive-bin \   # provides pdfpages, so that the print_efficiently scripts work
-)
+# make sure xbps is updated
+sudo xbps-install -Su xbps; sudo xbps-install -Su xbps
 
-for package in "${PK[@]}"; do sudo xbps-install -y "$package"; done
+# install each package separately to avoid an error killing the whole process
+source s/packages.sh; for p in "${PK[@]}"; do sudo xbps-install -y "$p"; done
 
-# reconfigure virtualbox here
+# reconfigure virtualbox here (is the script lost forever?)
+echo "FIND VIRTUALBOX RECONFIGURATION SCRIPT"
 
-sudo usermod -aG kvm `whoami`; sudo modprobe -v kvm-intel    # qemu adjustments
+# qemu adjustments
+sudo usermod -aG kvm `whoami`; sudo modprobe -v kvm-intel    
 
 ## FOLDER STRUCTURE ## ----------------------------------------------------- ##
 # update xdg directories and gtk bookmarks when these change
 
-mkdir -vp $HOME/system
-mkdir -vp $HOME/system/software
-mkdir -vp $HOME/system/wallpaper
-mkdir -vp $HOME/system/virtualmachines
-mkdir -vp $HOME/system/public
-mkdir -vp $HOME/system/templates
-mkdir -vp $HOME/system/scripts
-mkdir -vp $HOME/system/disk_images
-
-mkdir -vp $HOME/libraries/
-
-mkdir -vp $HOME/unsorted
-
-mkdir -vp $HOME/amusant/
-mkdir -vp $HOME/amusant/images
-mkdir -vp $HOME/amusant/music
-mkdir -vp $HOME/amusant/videos
-mkdir -vp $HOME/amusant/stories
-mkdir -vp $HOME/amusant/games
-
-mkdir -vp $HOME/private/
-mkdir -vp $HOME/private/notes
-
-sudo mkdir -vp /network/
-sudo mkdir -vp /network/amusant
-sudo mkdir -vp /network/intimate
-sudo mkdir -vp /network/system
-sudo mkdir -vp /network/libraries
-sudo mkdir -vp /network/settings
-sudo chown -Rv `whoami`:`whoami` /network/; sudo chmod -Rv 755 /network/
-
-# set up XDG directories
-XR=/etc/xdg/user-dirs.defaults;XU=$HOME/.config/user-dirs.defaults;TP=/tmp/xdg.t
-echo "XDG_MUSIC_DIR=\"$HOME/amusant/music\""                               > $TP
-echo "XDG_PUBLICSHARE_DIR=\"$HOME/system/public\""                        >> $TP
-echo "XDG_TEMPLATES_DIR=\"$HOME/system/templates\""                       >> $TP
-echo "XDG_VIDEOS_DIR=\"$HOME/amusant/videos\""                            >> $TP
-echo "XDG_DOCUMENTS_DIR=\"$HOME/libraries\""                              >> $TP
-echo "XDG_PICTURES_DIR=\"$HOME/unsorted\""                                >> $TP
-echo "XDG_DOWNLOAD_DIR=\"$HOME/unsorted\""                                >> $TP
-echo "XDG_DESKTOP_DIR=\"$HOME/unsorted\""                                 >> $TP
-sudo install -Dv $TP                               "/etc/xdg/user-dirs.defaults"
-INSTALL $TP                                   "$HOME/.config/user-dirs.defaults"
-
-# set up bookmarks
-sudo chown -R `whoami`:`whoami` $HOME
-mkdir -pv $HOME/.config/gtk-3.0/; G3B=$HOME/.config/gtk-3.0/bookmarks
-echo "file:///home/`whoami`/unsorted unsorted"                           >> $G3B
-echo "file:///home/`whoami`/libraries libraries"                          > $G3B
-echo "file:///home/`whoami`/private private"                             >> $G3B
-echo "file:///home/`whoami`/system system"                               >> $G3B
-echo "file:///home/`whoami`/amusant amusant"                             >> $G3B
-echo "file:///network/libraries  libraries"                             >> $G3B
-echo "file:///network/intimate  intimate"                               >> $G3B
-echo "file:///network/system  system"                                   >> $G3B
-echo "file:///network/amusant  amusant"                                 >> $G3B
-echo "file:///network/settings  settings"                               >> $G3B
+bash s/folderstructure.sh
 
 ## DAEMONS INITIALIZATION ## ----------------------------------------------- ##
 
@@ -141,30 +74,10 @@ echo "file:///network/settings  settings"                               >> $G
 # also ntpd, after the dependency (ntp?) is installed
 
 ## MOUNT NETWORK DRIVES ## ------------------------------------------------- ##
-# TODO: move this to its own script
 # if the NAS is still in use, this should allow access. Remember to keep the
 # folder hierarchy in sync accross files.
 
-mkdir -pv $HOME/.ssh; CONFIG=$HOME/.ssh/config
-echo "Host $NAShostname"                                               > $CONFIG
-echo "HostName $NAShostname"              >> $CONFIG # alternately an IP address
-echo "User `whoami`"                                                  >> $CONFIG
-
-# set up passwordless ssh, so that I can use sshfs to access storage server
-if [ ! -f $HOME/.ssh/sshfs.key ];then
-    # ssh-keygen -f $HOME/.ssh/sshfs.key
-    # ssh-copy-id -i $HOME/.ssh/sshfs.key.pub `whoami`@$NAShostname
-    # the above method works, except that I would have to specify a nonstandard
-    # key every time I wanted to login.  Maybe that's fine for the sshfs, but I
-    # need to use a better keyname, AND I need to actually use it in the mount
-	# script.
-    ssh-keygen 
-    ssh-copy-id `whoami`@$NAShostname
-fi
-
-[ ! -f /etc/fuse.conf.bak ] && sudo cp /etc/fuse.conf /etc/fuse.conf.bak
-echo "user_allow_other" | sudo tee /etc/fuse.conf # required for allow_root
-
+bash s/networkdrives.sh || echo "connection to network drive failed"
 
 ## SYSTEM CONSTRUCTION ## --------------------------------------------------- ##
 
@@ -223,8 +136,8 @@ fi
 # echo "(su `whoami` -c '/usr/local/bin/mountnetworkdrives.sshfs.sh') &"                        | sudo tee -a $RL
 
 # set up compact printing script tools
-sudo install -Dv s/pdfjam.3.03                           "/usr/local/bin/pdfjam"
-sudo install -Dv s/print_efficiently.sh    "/usr/local/bin/print_efficiently.sh"
+sudo install -Dv s/pdfjam                                "/usr/local/bin/pdfjam"
+sudo install -Dv s/print_efficiently.2.sh  "/usr/local/bin/print_efficiently.sh"
 sudo install -Dv s/print_efficiently_quickly.sh  "/usr/local/bin/print_efficiently_quickly.sh"
 
 ## AESTHETIC MODIFICATIONS ## ----------------------------------------------- ##

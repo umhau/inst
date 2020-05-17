@@ -3,7 +3,7 @@
 # note: always use exec --no-startup-id for commands, because otherwise your mouse gets the waiting symbol for 60 seconds.
 
 # fix display autodetection | what is the replacement here?
-exec --no-startup-id autorandr -c
+exec --no-startup-id bash $HOME/system/scripts/display/displayconfig.sh
 
 # fix screen resolution issues - blanket fix seems to work well
 exec --no-startup-id xrandr --dpi 80 # 80 works better with the vertical screens #96
@@ -225,11 +225,15 @@ for_window [title="galculator"] floating enable
 bindsym XF86Calculator exec --no-startup-id galculator
 
 # enable serial mouse (if available - it will exit/fail on its own if not there)
-exec --no-startup-id sudo bash /usr/bin/local/serialmouseconfig.sh &
+exec --no-startup-id serialmouseconfig.sh &
 
 # mount network drives
-exec --no-startup-id bash /usr/bin/local/mountnetworkdrives.sshfs.sh &
+exec --no-startup-id mountnetworkdrives.sshfs.sh &
 
+# fix screen resolution issues - blanket fix seems to work well
+exec --no-startup-id xrandr --dpi 80 # 80 works better with the vertical screens #96
+
+# wallpaper changer
 exec --no-startup-id bash /home/`whoami`/system/wallpaper/wallpaper_changer.sh
 
 # lock the screen with minimal delay (ideally, the desktop is never visible )

@@ -1,3 +1,16 @@
-set number
-set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab
-syntax on
+set number                                               | "   show line numbers
+
+set tabstop=8 softtabstop=0 expandtab shiftwidth=4 smarttab   | " tab = 4 spaces
+
+syntax on         | " tab config disables syntax highlighting; this reenables it
+
+set autoread            | "  automatically reload files when they change on disk
+
+set mouse=a ttymouse=xterm2             | " use the mouse to resize :split panes
+
+let &colorcolumn=join(range(81,999),",")      | " highlight colums 81 and onward
+
+highlight ColorColumn ctermbg=233 guibg=#2c2d27   | " choose 81+ highlight color
+
+highlight Normal ctermbg=232                       | " standard background color
+

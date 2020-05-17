@@ -1,21 +1,13 @@
 # how can this be improved? 
 # given the reconnect option, maybe the while loop can be dropped?
 
-i=0
-while (($i<40));do 
+FOLDERS=(amusant intimate system libraries settings)
+OPTIONS="allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3"
 
-if ! mount | grep personalstorage; then
-if [[ `iwgetid -r` =~ "UXB2O" ]]; then
-ssh-add ~/.ssh/sshfs.key ``
-sshfs -o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 personalstorage:/networkstorage/amusant   /network/amusant
-sshfs -o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 personalstorage:/networkstorage/intimate  /network/intimate 
-sshfs -o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 personalstorage:/networkstorage/system    /network/system 
-sshfs -o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 personalstorage:/networkstorage/libraries /network/libraries 
-sshfs -o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3 personalstorage:/networkstorage/settings  /network/settings 
-
-
-
-fi; fi; ((i++)); sleep 5; done 
+for F in ${FOLDERS[@]}; do 
+    echo "mounting $F"
+    sshfs -o "$OPTIONS" personalstorage:/networkstorage/$F /network/$F 
+done
 
 # allow_root:   otherwise any command invoking sudo and involving the sshfs 
 # directory will fail.
