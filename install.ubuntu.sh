@@ -12,7 +12,7 @@
 ## STATUS CHECK ## --------------------------------------------------------- ##
 
 # this is for the autologin, since I'm altering the behavior of tty1.
-if tty | grep -q 'tty1'; then echo "use tty2!"; exit; fi
+# if tty | grep -q 'tty1'; then echo "use tty2!"; exit; fi
 
 ## VARIABLES ## ------------------------------------------------------------ ##
 
@@ -29,7 +29,7 @@ sudo apt --purge autoremove -y
 sudo apt update
 sudo apt upgrade -y
 
-# for pkg in "${PK[@]}";do sudo apt install -y "$pkg";done   # install separately
+for pkg in "${PK[@]}";do sudo apt install -y "$pkg";done   # install separately
 
 sudo apt --purge autoremove -y
 sudo apt update
@@ -38,7 +38,7 @@ sudo apt upgrade -y
 ## FOLDER STRUCTURE ## ----------------------------------------------------- ##
 # update xdg directories and gtk bookmarks when these change
 
-# bash s/folderstructure.sh
+bash s/folderstructure.sh
 
 ## DAEMONS INITIALIZATION ## ----------------------------------------------- ##
 
@@ -75,19 +75,19 @@ sudo install -Dv s/serialmouseconfig.sh    "/usr/local/bin/serialmouseconfig.sh"
 sudo install -Dv /usr/bin/stterm /usr/bin/st
 
 # serial mouse: kensington expert mouse
-gcc s/inputattach.c -o s/inputattach
+# gcc s/inputattach.c -o s/inputattach
 # sudo install -Dv s/65-kensingtonexpertmouse.rules           "/etc/udev/rules.d/"
-sudo install -Dv s/inputattach                                 "/usr/local/bin/"
+# sudo install -Dv s/inputattach                                 "/usr/local/bin/"
 
-if [ -f s/wpa_supplicant.conf ];then
-    sudo install -Dv s/wpa_supplicant.conf "/etc/wpa_supplicant/"; fi
+#if [ -f s/wpa_supplicant.conf ];then
+#    sudo install -Dv s/wpa_supplicant.conf "/etc/wpa_supplicant/"; fi
 
 # automatic login 
-GD=/etc/gdm3/custom.conf; [ ! -f $GD.bak ] && cp $GD $GD.bak
-echo "[daemon]"                                                   | sudo tee $GD 
-echo "TimedLoginEnable = true"                                 | sudo tee -a $GD 
-echo "TimedLogin = `whoami`"                                   | sudo tee -a $GD
-echo "TimedLoginDelay = 1"                                     | sudo tee -a $GD
+#GD=/etc/gdm3/custom.conf; [ ! -f $GD.bak ] && cp $GD $GD.bak
+#echo "[daemon]"                                                   | sudo tee $GD 
+#echo "TimedLoginEnable = true"                                 | sudo tee -a $GD 
+#echo "TimedLogin = `whoami`"                                   | sudo tee -a $GD
+#echo "TimedLoginDelay = 1"                                     | sudo tee -a $GD
 
 # reboot without root password 
 if ! sudo grep --quiet "/usr/bin/reboot" /etc/sudoers 2>/dev/null; then
@@ -96,10 +96,10 @@ if ! sudo grep --quiet "/usr/bin/reboot" /etc/sudoers 2>/dev/null; then
 fi
 
 # run mouseconfig for the serial mouse without root password 
-if ! sudo grep --quiet "serialmouseconfig" /etc/sudoers 2>/dev/null; then
-    TEXT="`whoami` ALL = NOPASSWD: /usr/local/bin/serialmouseconfig.sh"
-    echo "$TEXT" | sudo EDITOR='tee -a' visudo
-fi
+#if ! sudo grep --quiet "serialmouseconfig" /etc/sudoers 2>/dev/null; then
+#    TEXT="`whoami` ALL = NOPASSWD: /usr/local/bin/serialmouseconfig.sh"
+#    echo "$TEXT" | sudo EDITOR='tee -a' visudo
+#fi
 
 # RL="/etc/rc.local";                      [ ! -f $RL.bak ] && sudo cp $RL $RL.bak
 # echo "(wpa_supplicant -B -i$wifidev -D$wifidriver -c/etc/wpa_supplicant/wpa_supplicant.conf) &" | sudo tee $RL
@@ -107,9 +107,9 @@ fi
 # echo "(su `whoami` -c '/usr/local/bin/mountnetworkdrives.sshfs.sh') &"                        | sudo tee -a $RL
 
 # set up compact printing script tools
-sudo install -Dv s/pdfjam                                "/usr/local/bin/pdfjam"
-sudo install -Dv s/print_efficiently.2.sh  "/usr/local/bin/print_efficiently.sh"
-sudo install -Dv s/print_efficiently_quickly.sh  "/usr/local/bin/print_efficiently_quickly.sh"
+#sudo install -Dv s/pdfjam                                "/usr/local/bin/pdfjam"
+#sudo install -Dv s/print_efficiently.2.sh  "/usr/local/bin/print_efficiently.sh"
+#sudo install -Dv s/print_efficiently_quickly.sh  "/usr/local/bin/print_efficiently_quickly.sh"
 
 ## AESTHETIC MODIFICATIONS ## ----------------------------------------------- ##
 
@@ -127,9 +127,9 @@ if mount | grep "/network/system" > /dev/null; then
 fi
 
 # multimonitor lock screen | dependencies: imagemagick i3lock
-sudo install -v s/i3lock-mm /usr/local/bin/;
-sudo chmod -v +x /usr/local/bin/i3lock-mm
-mkdir -pv $HOME/system/wallpaper/lockscreens/
-cp -v s/lockscreen.surf.png $HOME/system/wallpaper/lockscreens/surf.png
+#sudo install -v s/i3lock-mm /usr/local/bin/;
+#sudo chmod -v +x /usr/local/bin/i3lock-mm
+#mkdir -pv $HOME/system/wallpaper/lockscreens/
+#cp -v s/lockscreen.surf.png $HOME/system/wallpaper/lockscreens/surf.png
 
 echo "done. press enter to reboot now. > "; read; sudo reboot
