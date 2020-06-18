@@ -83,11 +83,15 @@ sudo install -Dv /usr/bin/stterm /usr/bin/st
 #    sudo install -Dv s/wpa_supplicant.conf "/etc/wpa_supplicant/"; fi
 
 # automatic login 
-#GD=/etc/gdm3/custom.conf; [ ! -f $GD.bak ] && cp $GD $GD.bak
-#echo "[daemon]"                                                   | sudo tee $GD 
-#echo "TimedLoginEnable = true"                                 | sudo tee -a $GD 
-#echo "TimedLogin = `whoami`"                                   | sudo tee -a $GD
-#echo "TimedLoginDelay = 1"                                     | sudo tee -a $GD
+sudo mkdir -p /etc/systemd/system/getty@tty1.service.d
+sudo rm -rf /etc/systemd/system/getty@tty1.service.d/override.conf
+
+WRT() { echo "$1" | sudo tee -a /etc/systemd/system/getty@tty1.service.d/override.conf; }
+
+WRT '[Service]'
+WRT 'ExecStart='
+WRT 'ExecStart=-/sbin/agetty --noissue --autologin ndi %I $TERM'
+WRT 'Type=idle'
 
 # reboot without root password 
 if ! sudo grep --quiet "/usr/bin/reboot" /etc/sudoers 2>/dev/null; then
