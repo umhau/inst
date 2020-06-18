@@ -5,15 +5,6 @@
 
 # To fix appearances after installation, use the packages lxappearance and qt5ct
 
-# you MUST be logged in at tty2, NOT tty1, when this is run, due to the process
-# of installing the autologin system. It messes with what the tty1 does.
-# stop the script with ctrl-z
-
-## STATUS CHECK ## --------------------------------------------------------- ##
-
-# this is for the autologin, since I'm altering the behavior of tty1.
-# if tty | grep -q 'tty1'; then echo "use tty2!"; exit; fi
-
 ## VARIABLES ## ------------------------------------------------------------ ##
 
 NAShostname="personalstorage"
