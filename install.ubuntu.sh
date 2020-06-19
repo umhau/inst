@@ -81,7 +81,7 @@ WRT() { echo "$1" | sudo tee -a /etc/systemd/system/getty@tty1.service.d/overrid
 
 WRT '[Service]'
 WRT 'ExecStart='
-WRT 'ExecStart=-/sbin/agetty --noissue --autologin ndi %I $TERM'
+WRT "ExecStart=-/sbin/agetty --noissue --autologin `whoami` %I \$TERM"
 WRT 'Type=idle'
 
 # reboot without root password 
