@@ -77,7 +77,7 @@ bash s/folderstructure.sh
 # if the NAS is still in use, this should allow access. Remember to keep the
 # folder hierarchy in sync accross files.
 
-bash s/networkdrives.sh || echo "connection to network drive failed"
+# bash s/networkdrives.sh || echo "connection to network drive failed"
 
 ## SYSTEM CONSTRUCTION ## --------------------------------------------------- ##
 
@@ -99,10 +99,11 @@ sudo install -Dv s/serialmouseconfig.sh    "/usr/local/bin/serialmouseconfig.sh"
 
 
 # serial mouse: kensington expert mouse
-gcc s/inputattach.c -o s/inputattach
+# gcc s/inputattach.c -o s/inputattach
 # sudo install -Dv s/65-kensingtonexpertmouse.rules           "/etc/udev/rules.d/"
-sudo install -Dv s/inputattach                                 "/usr/local/bin/"
+# sudo install -Dv s/inputattach                                 "/usr/local/bin/"
 
+# TODO: include supplicant.conf in the git repo, but encrypt it.
 if [ -f s/wpa_supplicant.conf ];then
     sudo install -Dv s/wpa_supplicant.conf "/etc/wpa_supplicant/"; fi
 
@@ -125,10 +126,10 @@ if ! grep --quiet "/usr/bin/reboot" /etc/sudoers 2>/dev/null; then
 fi
 
 # run mouseconfig for the serial mouse without root password 
-if ! grep --quiet "serialmouseconfig" /etc/sudoers 2>/dev/null; then
-    TEXT='%wheel ALL=(ALL) NOPASSWD: /usr/local/bin/serialmouseconfig.sh'
-    echo "$TEXT" | sudo EDITOR='tee -a' visudo
-fi
+#if ! grep --quiet "serialmouseconfig" /etc/sudoers 2>/dev/null; then
+#    TEXT='%wheel ALL=(ALL) NOPASSWD: /usr/local/bin/serialmouseconfig.sh'
+#    echo "$TEXT" | sudo EDITOR='tee -a' visudo
+#fi
 
 # RL="/etc/rc.local";                      [ ! -f $RL.bak ] && sudo cp $RL $RL.bak
 # echo "(wpa_supplicant -B -i$wifidev -D$wifidriver -c/etc/wpa_supplicant/wpa_supplicant.conf) &" | sudo tee $RL
