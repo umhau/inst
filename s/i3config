@@ -190,8 +190,17 @@ bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ unmute && amixer set Hea
 bindsym XF86AudioLowerVolume exec amixer set Master 5%- unmute && amixer set Headphone unmute && amixer set Speaker unmute
 bindsym XF86AudioMute exec amixer set Master mute
 
-bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 10
-bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+# bindsym XF86MonBrightnessUp   exec --no-startup-id xbacklight -inc 10
+# bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
+
+bindsym XF86MonBrightnessDown exec "sys='/sys/class/backlight/*backlight';\
+    bri=$(cat ${sys}/bri*); max=$(cat ${sys}/max*);\
+    val=$(($bri - $max / 32)); val=$(($val < 0 ? 0 : $val));\
+    echo $val | sudo tee ${sys}/bri*;"
+bindsym XF86MonBrightnessUp exec "sys='/sys/class/backlight/*backlight';\
+    bri=$(cat ${sys}/bri*); max=$(cat ${sys}/max*);\
+    val=$(($bri + $max / 32)); val=$(($val > $max ? $max : $val));\
+    echo $val | sudo tee ${sys}/bri*;"
 
 bindsym Print exec --no-startup-id scrot -u -e 'mv $f ~/system/unsorted/'
 for_window [title="save screenshot"] floating enable
