@@ -125,6 +125,14 @@ if ! grep --quiet "/usr/bin/reboot" /etc/sudoers 2>/dev/null; then
     echo "$TEXT" | sudo EDITOR='tee -a' visudo
 fi
 
+# control the backlight
+if ! grep --quiet "/sys/class/backlight" /etc/sudoers 2>/dev/null; then
+    TEXT='%wheel ALL=(ALL) NOPASSWD: /usr/bin/tee /sys/class/backlight/*/brightness'
+    echo "$TEXT" | sudo EDITOR='tee -a' visudo
+fi
+
+    
+
 # run mouseconfig for the serial mouse without root password 
 #if ! grep --quiet "serialmouseconfig" /etc/sudoers 2>/dev/null; then
 #    TEXT='%wheel ALL=(ALL) NOPASSWD: /usr/local/bin/serialmouseconfig.sh'
