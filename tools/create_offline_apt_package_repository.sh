@@ -11,6 +11,5 @@ for PKG in "${pkgs[@]}"; do sudo apt -d install $PKG -y; sudo cp -n /var/cache/a
 sudo apt-get install dpkg-dev -y
 cd /home/`whoami`/myrepository
 dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
-sudo update-mydebs
 
 cd; tar cfv "$fnm".tar $fnm
