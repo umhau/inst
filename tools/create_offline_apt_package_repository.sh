@@ -5,10 +5,10 @@ set -ev
 # create an offline repo. the output of this script is a .tar file that can be downloaded and moved to the offline machine.
 
 pkgs=(banshee vlc emacs )
-fnm="/home/`whoami`/myrepository && mkdir $fnm
+fnm="/home/`whoami`/myrepository" && mkdir $fnm
 for PKG in "${pkgs[@]}"; do sudo apt -d install $PKG -y; sudo cp -n /var/cache/apt/archives/*.deb "$fnm/"; sudo apt clean; done
 
-sudo apt-get install dpkg-dev
+sudo apt-get install dpkg-dev -y
 cd /home/`whoami`/myrepository
 dpkg-scanpackages . /dev/null | gzip -9c > Packages.gz
 sudo update-mydebs
