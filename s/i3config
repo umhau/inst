@@ -250,4 +250,5 @@ exec --no-startup-id i3lock-mm -i ~/system/wallpaper/lockscreens/surf.png
 
 # lock screen keyboard shortcut
 bindsym $mod+Control+l exec --no-startup-id i3lock-mm -i ~/system/wallpaper/lockscreens/surf.png 
+bindsym XF86ScreenSaver exec --no-startup-id i3lock-mm -i ~/system/wallpaper/lockscreens/surf.png 
 
