@@ -1,5 +1,5 @@
 #!/bin/bash
-set -ev
+set -v
 
 # based on https://umhau.github.io/offline-package-installation-with-local-apt-repository/
 # create an offline repo. the output of this script is a .tar file that can be downloaded and moved to the offline machine.
