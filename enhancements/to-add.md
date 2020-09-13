@@ -1,5 +1,15 @@
 # packages, repositories, scripts that I've not yet implemented
 
+## functional
+
+- KVM virtual machine manager instead of virtualbox 
+
+It's time to graduate. VB is training wheels.
+
+- https://github.com/ispc/ispc/
+
+Interesting tool that I'll probably want to try at some point.
+
 ## aesthetic
 
 - https://github.com/jeffmhubbard/multilockscreen
