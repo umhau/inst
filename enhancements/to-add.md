@@ -10,6 +10,8 @@ It's time to graduate. VB is training wheels.
 
 Interesting tool that I'll probably want to try at some point.
 
+https://github.com/mcpcpc/kirc Move from Hexchat. With something like this, I can keep it running in the terminal on an always-on computer.
+
 ## aesthetic
 
 - https://github.com/jeffmhubbard/multilockscreen
