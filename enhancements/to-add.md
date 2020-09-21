@@ -2,6 +2,8 @@
 
 ## functional
 
+https://www.freshrss.org/ (For the recommendation, see here: https://news.ycombinator.com/item?id=24539771) A better RSS reader, that I can host and that won't be dependent on any particular desktop computer.
+
 - KVM virtual machine manager instead of virtualbox 
 
 It's time to graduate. VB is training wheels.
