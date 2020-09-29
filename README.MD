@@ -3,9 +3,9 @@
 In order to install the autologin script, make sure that you are logged in at
 tty2, NOT tty1.  
 
-To perform a full system configuration, run:
+To perform a full system configuration, run the install script corresponding to your base OS.  
 
-    bash install.sh
+    bash install.void.sh
 
 # TODO
 
