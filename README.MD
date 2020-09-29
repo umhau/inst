@@ -21,32 +21,32 @@ https://wiki.voidlinux.org/Post_Installation
 
 
 ## file organization
-[X] automount folders into /network
-[ ] copy files from AS_VX HDDs to NAS
-[X] adjust folders: downloads,screenshots,desktop,documents,pictures -> 'unsorted'
-[ ] make system/scripts/i3/ and put all system management scripts in there.
+- [X] automount folders into /network
+- [ ] copy files from AS_VX HDDs to NAS
+- [X] adjust folders: downloads,screenshots,desktop,documents,pictures -> 'unsorted'
+- [ ] make system/scripts/i3/ and put all system management scripts in there.
 
 ## interface improvement
-[X] fix themes and appearance (install packages, config, and extract configs)
-[ ] theme rofi
-[ ] build pie menu - arbitrary layers and items per-layer, themeable, built in pure X
-[ ] build shutdown menu, find a way to activate it
+- [X] fix themes and appearance (install packages, config, and extract configs)
+- [ ] theme rofi
+- [ ] build pie menu - arbitrary layers and items per-layer, themeable, built in pure X
+- [ ] build shutdown menu, find a way to activate it
 
 ## utility improvement
-[ ] script to manage displays - autorandr is unreliable (or does it get confused by multiple matching configurations?)
-[ ] adjust brightness directly with `/sys/class/backlight/*/brightness`
-[ ] modify trackball mice button actions
-[X] date indicator on i3status
-[ ] hostname indicator on i3status
-[ ] meta workspaces: https://github.com/mrconter1/i3_meta_workspaces
+- [ ] script to manage displays - autorandr is unreliable (or does it get confused by multiple matching configurations?)
+- [ ] adjust brightness directly with `/sys/class/backlight/*/brightness`
+- [ ] modify trackball mice button actions
+- [X] date indicator on i3status
+- [ ] hostname indicator on i3status
+- [ ] meta workspaces: https://github.com/mrconter1/i3_meta_workspaces
 
 ## BUGS
 
-[ ] /network/settings blocks all access when using sudo, which means I can't use `sudo install`.
+- [ ] /network/settings blocks all access when using sudo, which means I can't use `sudo install`.
 
 ## installation scripts
 general: make it obvious that they work, when I come back to them after a year
-[X] create settings installation script(s)
+- [X] create settings installation script(s)
 
 ## NOTES
 
@@ -156,8 +156,8 @@ other general TODO items:
 # long term project: Plan 9
 
 Critical tools:
-[ ] i3: call it i9
-[ ] web browser (surf?)
-[ ] qemu
-[ ] GUI text editor / emacs / vim
-[ ] file browser
+- [ ] i3: call it i9
+- [ ] web browser (surf?)
+- [ ] qemu
+- [ ] GUI text editor / emacs / vim
+- [ ] file browser
