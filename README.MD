@@ -21,6 +21,7 @@ https://wiki.voidlinux.org/Post_Installation
 
 
 ## file organization
+- [ ] put the inst folder this github repo represents into the ~/system folder.
 - [X] automount folders into /network
 - [ ] copy files from AS_VX HDDs to NAS
 - [X] adjust folders: downloads,screenshots,desktop,documents,pictures -> 'unsorted'
