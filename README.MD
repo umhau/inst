@@ -13,6 +13,7 @@ Many of these things are discussed on the void wiki.
 https://wiki.voidlinux.org/Post_Installation
 
 ## installation
+- [ ] ensure that I can rerun this tool repeatedly, without damage. this allows me to continuously edit a preexisting OS installation.
 - [ ] disp function does not work
 - [ ] separate script to configure wifi stuff, so that I can avoid it on desktop.
 - [ ] put most of the information on a second tty.  errors on one, verbosity on 
