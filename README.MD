@@ -13,11 +13,11 @@ Many of these things are discussed on the void wiki.
 https://wiki.voidlinux.org/Post_Installation
 
 ## installation
-[ ] disp function does not work
-[ ] separate script to configure wifi stuff, so that I can avoid it on desktop.
-[ ] put most of the information on a second tty.  errors on one, verbosity on 
+- [ ] disp function does not work
+- [ ] separate script to configure wifi stuff, so that I can avoid it on desktop.
+- [ ] put most of the information on a second tty.  errors on one, verbosity on 
     another.  1>/dev/tty3, 2>/dev/tty4, etc.
-[ ] install a proper ntp daemon. See: https://wiki.voidlinux.org/NTP
+- [ ] install a proper ntp daemon. See: https://wiki.voidlinux.org/NTP
 
 
 ## file organization
