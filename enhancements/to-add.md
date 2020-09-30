@@ -2,6 +2,8 @@
 
 ## functional
 
+https://jdownloader.org/download/index Really awesome download manager. The install script pulls more stuff from online; I want to grab a finished installation and repackage it, so that I don't have to worry about offline installations (or when the software disappears?).
+
 https://www.freshrss.org/ (For the recommendation, see here: https://news.ycombinator.com/item?id=24539771) A better RSS reader, that I can host and that won't be dependent on any particular desktop computer.
 
 
@@ -21,4 +23,4 @@ https://github.com/jeffmhubbard/multilockscreen This is a multimonitor lock scre
 
 https://github.com/captn3m0/Scripts A bunch of useful-looking scripts I'm not done browsing through.
 
-https://github.com/blackjack4494/youtube-dlc Replacement for youtube-dl, since it seems to be dying.
+https://github.com/blackjack4494/youtube-dlc Replacement for youtube-dl, since it might be dying.
