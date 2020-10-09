@@ -2,6 +2,8 @@
 
 ## functional
 
+https://ubuntu.com/tutorials/install-and-configure-samba#4-setting-up-user-accounts-and-connecting-to-share A standard share folder on each computer. put it somewhere like ~/system/shared, and automatically set up a password.
+
 https://jdownloader.org/download/index Really awesome download manager. The install script pulls more stuff from online; I want to grab a finished installation and repackage it, so that I don't have to worry about offline installations (or when the software disappears?).
 
 https://www.freshrss.org/ (For the recommendation, see here: https://news.ycombinator.com/item?id=24539771) A better RSS reader, that I can host and that won't be dependent on any particular desktop computer.
