@@ -56,6 +56,7 @@ source s/packages.sh; for p in "${PK[@]}"; do sudo xbps-install -y "$p"; done
 
 # reconfigure virtualbox here (is the script lost forever?)
 echo "FIND VIRTUALBOX RECONFIGURATION SCRIPT"
+sudo adduser $USER vboxusers
 
 # qemu adjustments
 sudo usermod -aG kvm `whoami`; sudo modprobe -v kvm-intel    
