@@ -30,7 +30,8 @@ cups-filters \                           # this allows installing local printers
 ImageMagick \                  # needed for the improved lock screen to function
 intel-ucode \                               # might help with external monitors?
 texlive-bin \    # provides pdfpages, so that the print_efficiently scripts work
-lyx lyx-common fonts-lyx          # lyx (wysiwyg doc + math, easier than latex?)
-sagemath sagemath-common sagemath-doc sagemath-jupyter   # all-in-one math suite
-maxima maxima-doc maxima-share maxima-test wxmaxima xmaxima # comp. algebra sys.
+lyx lyx-common fonts-lyx \        # lyx (wysiwyg doc + math, easier than latex?)
+sagemath sagemath-common sagemath-doc sagemath-jupyter \ # all-in-one math suite
+maxima maxima-doc maxima-share maxima-test wxmaxima xmaxima \  # c. algebra sys.
+julia julia-common julia-doc libjulia-dev libjulia1 vim-julia \          # julia
 )
