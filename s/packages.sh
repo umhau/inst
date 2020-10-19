@@ -34,4 +34,6 @@ lyx lyx-common fonts-lyx \        # lyx (wysiwyg doc + math, easier than latex?)
 sagemath sagemath-common sagemath-doc sagemath-jupyter \ # all-in-one math suite
 maxima maxima-doc maxima-share maxima-test wxmaxima xmaxima \  # c. algebra sys.
 julia julia-common julia-doc libjulia-dev libjulia1 vim-julia \          # julia
+cantor cantor-backend-julia cantor-backend-lua cantor-backend-maxima cantor-dev
+cantor-backend-python3 cantor-backend-octave cantor-backend-sage # nice math GUI
 )
