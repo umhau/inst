@@ -30,4 +30,5 @@ cups-filters \                           # this allows installing local printers
 ImageMagick \                  # needed for the improved lock screen to function
 intel-ucode \                               # might help with external monitors?
 texlive-bin \    # provides pdfpages, so that the print_efficiently scripts work
+lyx lyx-common fonts-lyx          # lyx (wysiwyg doc + math, easier than latex?)
 )
