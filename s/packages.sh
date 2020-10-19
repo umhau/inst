@@ -31,4 +31,6 @@ ImageMagick \                  # needed for the improved lock screen to function
 intel-ucode \                               # might help with external monitors?
 texlive-bin \    # provides pdfpages, so that the print_efficiently scripts work
 lyx lyx-common fonts-lyx          # lyx (wysiwyg doc + math, easier than latex?)
+sagemath sagemath-common sagemath-doc sagemath-jupyter   # all-in-one math suite
+maxima maxima-doc maxima-share maxima-test wxmaxima xmaxima # comp. algebra sys.
 )
