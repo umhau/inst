@@ -31,12 +31,6 @@ sudo apt upgrade -y
 
 bash s/folderstructure.sh
 
-## DAEMONS INITIALIZATION ## ----------------------------------------------- ##
-
-# also: smbd udevd  dhcpcd cupsd | NFS: nfs-server statd rpcbind
-# [ ! -d /var/service/cupsd ] && sudo ln -sv /etc/sv/cupsd /var/service/  # print
-# also ntpd, after the dependency (ntp?) is installed
-
 ## MOUNT NETWORK DRIVES ## ------------------------------------------------- ##
 # if the NAS is still in use, this should allow access. Remember to keep the
 # folder hierarchy in sync accross files.

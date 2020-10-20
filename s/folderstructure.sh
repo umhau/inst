@@ -46,21 +46,21 @@ if [ ! "$(ls -A /network)" ]; then
     sudo chown -Rv `whoami`:`whoami` /network/; sudo chmod -Rv 755 /network/; fi
 
 # set up XDG directories
-#XR=/etc/xdg/user-dirs.defaults;XU=$HOME/.config/user-dirs.defaults;TP=/tmp/xdg.t
-#echo "XDG_MUSIC_DIR=\"$HOME/amusant/music\""                               > $TP
-#echo "XDG_PUBLICSHARE_DIR=\"$HOME/system/public\""                        >> $TP
-#echo "XDG_TEMPLATES_DIR=\"$HOME/system/templates\""                       >> $TP
-#echo "XDG_VIDEOS_DIR=\"$HOME/amusant/videos\""                            >> $TP
-#echo "XDG_DOCUMENTS_DIR=\"$HOME/libraries\""                              >> $TP
-#echo "XDG_PICTURES_DIR=\"$HOME/unsorted\""                                >> $TP
-#echo "XDG_DOWNLOAD_DIR=\"$HOME/unsorted\""                                >> $TP
-#echo "XDG_DESKTOP_DIR=\"$HOME/unsorted\""                                 >> $TP
-#sudo install -Dv $TP                               "/etc/xdg/user-dirs.defaults"
-#INSTALL $TP                                   "$HOME/.config/user-dirs.defaults"
+XR=/etc/xdg/user-dirs.defaults;XU=$HOME/.config/user-dirs.defaults;TP=/tmp/xdg.t
+echo "XDG_MUSIC_DIR=\"$HOME/amusant/music\""                               > $TP
+echo "XDG_PUBLICSHARE_DIR=\"$HOME/system/public\""                        >> $TP
+echo "XDG_TEMPLATES_DIR=\"$HOME/system/templates\""                       >> $TP
+echo "XDG_VIDEOS_DIR=\"$HOME/amusant/videos\""                            >> $TP
+echo "XDG_DOCUMENTS_DIR=\"$HOME/libraries\""                              >> $TP
+echo "XDG_PICTURES_DIR=\"$HOME/unsorted\""                                >> $TP
+echo "XDG_DOWNLOAD_DIR=\"$HOME/unsorted\""                                >> $TP
+echo "XDG_DESKTOP_DIR=\"$HOME/unsorted\""                                 >> $TP
+sudo install -Dv $TP                               "/etc/xdg/user-dirs.defaults"
+INSTALL $TP                                   "$HOME/.config/user-dirs.defaults"
 
 # alternate version, possibly ubuntu-specific, possibly an updated syntax
 XR=/etc/xdg/user-dirs.defaults;XU=$HOME/.config/user-dirs.defaults;TP=/tmp/xdg.t
-echo "DESKTOP=unsorted"                                                    > $TP
+echo "DESKTOP=unsorted"                                                   >> $TP
 echo "DOWNLOAD=unsorted"                                                  >> $TP
 echo "TEMPLATES=system/templates"                                         >> $TP
 echo "PUBLICSHARE=system/public"                                          >> $TP
@@ -80,8 +80,8 @@ echo "file:///home/`whoami`/libraries libraries"                          > $G3B
 echo "file:///home/`whoami`/private private"                             >> $G3B
 echo "file:///home/`whoami`/system system"                               >> $G3B
 echo "file:///home/`whoami`/amusant amusant"                             >> $G3B
-echo "file:///network/libraries  libraries"                            >> $G3B
-echo "file:///network/intimate  intimate"                              >> $G3B
-echo "file:///network/system  system"                                  >> $G3B
-echo "file:///network/amusant  amusant"                                >> $G3B
-echo "file:///network/settings  settings"                              >> $G3B
+# echo "file:///network/libraries  libraries"                            >> $G3B
+# echo "file:///network/intimate  intimate"                              >> $G3B
+# echo "file:///network/system  system"                                  >> $G3B
+# echo "file:///network/amusant  amusant"                                >> $G3B
+# echo "file:///network/settings  settings"                              >> $G3B

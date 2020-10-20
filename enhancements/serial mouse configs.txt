@@ -1,0 +1,9 @@
+serial mouse configs
+
+# sudo install -Dv s/serialmouseconfig.sh  "/usr/local/bin/serialmouseconfig.sh"
+
+
+# serial mouse: kensington expert mouse
+# gcc s/inputattach.c -o s/inputattach
+# sudo install -Dv s/65-kensingtonexpertmouse.rules           "/etc/udev/rules.d/"
+# sudo install -Dv s/inputattach                                 "/usr/local/bin/"
