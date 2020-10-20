@@ -33,6 +33,8 @@ source s/packages.sh
 
 bash s/installpkgs.$osvers.sh                  # install each package separately
 
+bash femtolisp.sh                             # grab an awesome lisp interpreter
+
 sudo usermod -aG kvm `whoami`; sudo modprobe -v kvm-intel     # qemu adjustments
 
 bash s/folderstructure.sh                               # this seems OS-agnostic
