@@ -64,8 +64,8 @@ gimp imagemagick ffmpeg fswebcam streamer webcam moc soundconverter \
 texworks-scripting-lua texworks-scripting-python texworks texlive \
 texlive-xetex texlive-extra-utils '--install-suggests texstudio' xfe \
 texstudio \
-skypeforlinux curl firefox gdebi virtualbox syncthing solaar \
-libav-tools gparted xinit dpkg-dev fonts-lyx evince gnome-chess \
+curl  gdebi\
+libav-tools gparted dpkg-dev fonts-lyx evince gnome-chess \
 stockfish rlwrap libreoffice tofrodos lib32ncurses5 xbindkeys \
 gnome-screenshot xournal libqt5widgets5 libqt5network5 libqt5svg5 \
 pcmanfm ranger thunar zathura okular mupdf xpdf qdirstat lib32z1 \
