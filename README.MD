@@ -13,13 +13,11 @@ Many of these things are discussed on the void wiki.
 https://wiki.voidlinux.org/Post_Installation
 
 ## installation
-- [ ] ensure that I can rerun this tool repeatedly, without damage. this allows me to continuously edit a preexisting OS installation.
-- [ ] disp function does not work
-- [ ] separate script to configure wifi stuff, so that I can avoid it on desktop.
+- [ ] ensure that I can rerun this tool repeatedly, without damage. this allows 
+      me to continuously edit a preexisting OS installation.
 - [ ] put most of the information on a second tty.  errors on one, verbosity on 
-    another.  1>/dev/tty3, 2>/dev/tty4, etc.
+      another.  1>/dev/tty3, 2>/dev/tty4, etc.
 - [ ] install a proper ntp daemon. See: https://wiki.voidlinux.org/NTP
-
 
 ## file organization
 - [ ] put the inst folder this github repo represents into the ~/system folder.
@@ -48,7 +46,6 @@ https://wiki.voidlinux.org/Post_Installation
 
 ## installation scripts
 general: make it obvious that they work, when I come back to them after a year
-- [X] create settings installation script(s)
 
 ## NOTES
 

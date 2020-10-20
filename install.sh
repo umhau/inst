@@ -84,11 +84,11 @@ sudo install -Dv s/print_efficiently_quickly.sh  "/usr/local/bin/print_efficient
 
 mkdir -pv $HOME/system/wallpaper/lockscreens/
 
-sudo install -Dv s/gtk2.ini          "$HOME/.config/gtk-2.0/gtkfilechooser.ini"
-sudo install -Dv s/gtk3.settings.ini       "$HOME/.config/gtk-3.0/settings.ini"
-sudo install -Dv s/gtkrc2                                    "$HOME/.gtkrc-2.0"
-mkdir -pv $HOME/.config/vlc; sudo install -Dv s/vlcrc      "$HOME/.config/vlc/"
-sudo install -Dv s/wallpaper.sh   "$HOME/system/wallpaper/wallpaper_changer.sh"
+sudo install -Dv s/gtk2.ini           "$HOME/.config/gtk-2.0/gtkfilechooser.ini"
+sudo install -Dv s/gtk3.settings.ini        "$HOME/.config/gtk-3.0/settings.ini"
+sudo install -Dv s/gtkrc2                                     "$HOME/.gtkrc-2.0"
+mkdir -pv $HOME/.config/vlc; sudo install -Dv s/vlcrc       "$HOME/.config/vlc/"
+sudo install -Dv s/wallpaper.sh    "$HOME/system/wallpaper/wallpaper_changer.sh"
 
 # put a menu that organizes and lists programs down in the tray
 git clone https://github.com/trizen/menutray.git

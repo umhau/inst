@@ -15,6 +15,7 @@ rsync arandr font-spleen vscode \
 zenmap maim qemu galculator xpdf \
 i3status unzip unrar p7zip font-awesome5 cifs-utils gcc \
 ntfs-3g nfs-utils  \                                          # NFS dependencies
+thinkpad-scripts \                                               # helpful tools
 chromium-browser chromium firefox \           
 gdebi \                                           # package installer for ubuntu
 hexchat \                     # IRC. Not ssh-able, but familiar and easy to use.
