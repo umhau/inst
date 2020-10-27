@@ -42,7 +42,7 @@ cantor-backend-octave cantor-backend-sage cantor-dev cantor-backend-maxima \
 \
 # -- optional, but awesome -- #
 atom \
-lm-sensors xsensor psensor \ # then: sudo sensors-detect -> 'sensors'
+lm-sensors xsensor psensor \ # then: sudo sensors-detect - sensors
 hddtemp macchanger apl pandoc mirage inkscape hdparm xbacklight \
 alsa-utils pulseaudio deluge deluge-gtk syncthing syncthing-gtk \
 extrace autossh file-roller fex upx sc qrencode darkhttpd wgetpaste \
