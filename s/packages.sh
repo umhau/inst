@@ -11,7 +11,7 @@ xfe i3 j4-dmenu-desktop i3lock feh rofi \             # i3 minimum dependencies
 sct nano nload curl tmux htop qdirstat gparted xbindkeys gimp nomacs scrot zenity  \
 deadbeef vlc x264 ffmpeg youtube-dl qbittorrent xbanish \
 rsync arandr font-spleen vscode \
-# sublime-text3 sublime-merge \
+\ # sublime-text3 sublime-merge \
 zenmap maim qemu galculator xpdf \
 i3status unzip unrar p7zip font-awesome5 cifs-utils gcc \
 ntfs-3g nfs-utils  \                                          # NFS dependencies
