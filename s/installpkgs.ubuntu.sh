@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source s/packages.sh
+
 sudo apt --purge autoremove -y
 sudo apt update
 sudo apt upgrade -y
