@@ -29,8 +29,6 @@ INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
 
 bash s/autologin.$osvers.sh  # do this early, b/c the void version requires tty2
 
-source s/packages.sh
-
 bash s/installpkgs.$osvers.sh                  # install each package separately
 
 bash s/femtolisp.sh                           # grab an awesome lisp interpreter
