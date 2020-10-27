@@ -1,3 +1,7 @@
+#!/bin/bash
+
+source s/packages.sh
+
 # make sure xbps is updated
 sudo xbps-install -Su xbps; sudo xbps-install -Su xbps
 
