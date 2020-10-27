@@ -39,8 +39,7 @@ maxima maxima-doc maxima-share maxima-test wxmaxima xmaxima \  # c. algebra sys.
 julia julia-common julia-doc libjulia-dev libjulia1 vim-julia \          # julia
 cantor cantor-backend-julia cantor-backend-lua \                 # nice math GUI
 cantor-backend-octave cantor-backend-sage cantor-dev cantor-backend-maxima \
-\
-# -- optional, but awesome -- #
+\ # -- optional, but awesome -- #
 atom \
 lm-sensors xsensor psensor \ # then: sudo sensors-detect - sensors
 hddtemp macchanger apl pandoc mirage inkscape hdparm xbacklight \
