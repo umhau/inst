@@ -14,7 +14,6 @@ rsync arandr \
 maim qemu galculator xpdf \
 zenmap macchanger ipcalc \                                          # networking
 unzip unrar p7zip font-awesome5 cifs-utils \
-thunar \                                                          # file browser
 deluge deluge-gtk                                                   # bittorrent
 ntfs-3g nfs-utils  \                                          # NFS dependencies
 chromium-browser chromium firefox surf \                              # internet
@@ -33,11 +32,13 @@ Thunar thunar\               # definitely like it better than spacefm or pcmanfm
 cups-filters \                           # this allows installing local printers
 ImageMagick \                  # needed for the improved lock screen to function
 intel-ucode \                               # might help with external monitors?
+texlive-bin \    # provides pdfpages, so that the print_efficiently scripts work
+inkscape gimp                                                 # graphics editors
 \
 \ ## scientific computing ##
 \
-texlive-bin \    # provides pdfpages, so that the print_efficiently scripts work
 lyx lyx-common fonts-lyx \        # lyx (wysiwyg doc + math, easier than latex?)
+pandoc \                                            # document format conversion
 sagemath sagemath-common sagemath-doc sagemath-jupyter \ # all-in-one math suite
 maxima maxima-doc maxima-share maxima-test wxmaxima xmaxima \  # c. algebra sys.
 julia julia-common julia-doc libjulia-dev libjulia1 vim-julia \          # julia
@@ -52,7 +53,7 @@ lm-sensors xsensor psensor thinkpad-scripts hddtemp  \       # laptop management
 texworks-scripting-lua texworks-scripting-python texworks texlive \      # LATEX
 texlive-xetex texlive-extra-utils '--install-suggests texstudio' xfe texstudio \
 \
-apl pandoc mirage inkscape hdparm xbacklight \
+apl  mirage  hdparm xbacklight \
 alsa-utils pulseaudio  syncthing syncthing-gtk \
 extrace autossh file-roller fex upx sc qrencode darkhttpd wgetpaste \
 mdbook  scrot xlunch  pwgen ncdu  snooze \
