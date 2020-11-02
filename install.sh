@@ -42,7 +42,7 @@ bash s/folderstructure.sh                               # this seems OS-agnostic
 ## SYSTEM CONSTRUCTION ## --------------------------------------------------- ##
 
 INSTALL s/nanorc                                                 "$HOME/.nanorc"
-INSTALL s/bashrc.ubuntu                                          "$HOME/.bashrc"
+INSTALL s/bashrc.$osvers                                         "$HOME/.bashrc"
 INSTALL s/vimrc                                                   "$HOME/.vimrc"
 INSTALL  s/xinitrc                                              "$HOME/.xinitrc"
 INSTALL s/featherpad.conf                     "$HOME/.config/featherpad/fp.conf"

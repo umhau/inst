@@ -16,7 +16,7 @@ alias ymdl='youtube-dl -x '
 alias wget='wget --user-agent="Mozilla" '
 alias m='apropos '
 alias f='find / 2>/dev/null | grep '
-alias hlp='grep alias ~/.bashrc'
+alias hlp='grep alias ~/.bashrc && grep function ~/.bashrc'
 
 function mc { mkdir -p "$1"; cd "$1"; }
 function b { grep -a "$1" ~/.bash_history; }
