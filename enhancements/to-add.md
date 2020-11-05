@@ -1,5 +1,9 @@
 # packages, repositories, scripts that I've not yet implemented
 
+## system tools
+
+https://hackaday.com/2020/11/05/linux-fu-monitor-disks/
+
 ## functional
 
 https://ubuntu.com/tutorials/install-and-configure-samba#4-setting-up-user-accounts-and-connecting-to-share A standard share folder on each computer. put it somewhere like ~/system/shared, and automatically set up a password.
