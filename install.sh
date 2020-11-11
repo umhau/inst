@@ -39,6 +39,8 @@ bash s/folderstructure.sh                               # this seems OS-agnostic
 
 [ "$osvers" == "void" ] && s/daemons.$osvers.sh   # e.g. ssh, print server, etc.
 
+bash s/git_config.sh                                  # set global git variables
+
 ## SYSTEM CONSTRUCTION ## --------------------------------------------------- ##
 
 INSTALL s/nanorc                                                 "$HOME/.nanorc"
