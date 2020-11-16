@@ -39,6 +39,8 @@ https://wiki.voidlinux.org/Post_Installation
 - [X] date indicator on i3status
 - [ ] hostname indicator on i3status
 - [ ] meta workspaces: https://github.com/mrconter1/i3_meta_workspaces
+- [ ] use a single .bashrc that sources the ubuntu / void variants. I think I did this, just didn't push it. 
+- [ ] add aliases: `tmux list-sessions` and `tmux attach-session -t "$session_name"`
 
 ## BUGS
 
