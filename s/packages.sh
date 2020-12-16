@@ -12,6 +12,7 @@ sct nano nload curl tmux htop qdirstat gparted xbindkeys gimp nomacs scrot zenit
 deadbeef vlc x264 ffmpeg youtube-dl qbittorrent xbanish \
 rsync arandr \
 maim qemu galculator xpdf \
+git gitk git-gui \                       # extremely useful git management tools
 zenmap macchanger ipcalc \                                          # networking
 unzip unrar p7zip font-awesome5 cifs-utils \
 deluge deluge-gtk                                                   # bittorrent
