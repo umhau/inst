@@ -25,7 +25,7 @@ case $osvers in
     ;;
 esac
 
-INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
+
 
 bash s/autologin.$osvers.sh  # do this early, b/c the void version requires tty2
 
@@ -43,7 +43,12 @@ bash s/git_config.sh                                  # set global git variables
 
 ## SYSTEM CONSTRUCTION ## --------------------------------------------------- ##
 
+INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
+# COPY()          { sudo cp -rv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
+
 INSTALL s/nanorc                                                 "$HOME/.nanorc"
+sudo cp -rv s/geany "$HOME/.config/" && \
+  sudo chown -v `whoami`:`whoami` $HOME/.config/geany
 INSTALL s/bashrc.$osvers                                         "$HOME/.bashrc"
 INSTALL s/vimrc                                                   "$HOME/.vimrc"
 INSTALL  s/xinitrc                                              "$HOME/.xinitrc"
