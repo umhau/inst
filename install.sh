@@ -96,10 +96,10 @@ mkdir -pv $HOME/.config/vlc; sudo install -Dv s/vlcrc       "$HOME/.config/vlc/"
 sudo install -Dv s/wallpaper.sh    "$HOME/system/wallpaper/wallpaper_changer.sh"
 
 # put a menu that organizes and lists programs down in the tray
-git clone https://github.com/trizen/menutray.git
-sudo install menutray/menutray /usr/local/bin/
+# git clone https://github.com/trizen/menutray.git
+sudo install s/menutray/menutray /usr/local/bin/
 mkdir -p /home/`whoami`/.config/menutray
-sudo install -v menutray/schema.pl /home/`whoami`/.config/menutray/
+sudo install -v s/menutray/schema.pl /home/`whoami`/.config/menutray/
 
 # multimonitor lock screen | dependencies: imagemagick i3lock
 sudo install -v s/i3lock-mm /usr/local/bin/;
