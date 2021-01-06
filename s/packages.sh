@@ -87,9 +87,10 @@ font-spleen                                          # nice font for development
 lyx lyx-common fonts-lyx          # lyx (wysiwyg doc + math, easier than latex?)
 pandoc                                              # document format conversion
 
-texworks-scripting-lua texworks-scripting-python texworks                # LATEX
+biber                                                 # for latex bibliographies
+texworks-scripting-lua texworks-scripting-python texworks             # texworks
 texlive texlive-xetex texlive-extra-utils texlive-latexextra texlive-PythonTeX
-'--install-suggests texstudio'  texstudio  
+'--install-suggests texstudio'  texstudio                            # texstudio
 
 sagemath sagemath-common sagemath-doc sagemath-jupyter   # all-in-one math suite
 maxima maxima-doc maxima-share maxima-test wxmaxima xmaxima    # c. algebra sys.
@@ -99,7 +100,6 @@ octave gnuplot                                                    # MATLAB clone
 cantor cantor-backend-julia cantor-backend-lua                   # nice math GUI
 cantor-backend-octave cantor-backend-sage cantor-dev cantor-backend-maxima
 
-gnuplot
 ministat                                              # small statistics utility
 
 cmake build-essential gfortran gfortran-multilib gfortran-doc           #FORTRAN
