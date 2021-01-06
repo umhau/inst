@@ -1,0 +1,123 @@
+#!/bin/bash
+
+# This should only require sudo on the first use. After that, nothing requires
+# more than user permissions.  Hence, suitable for the i3config file.
+
+# This could turn into something much more complex later on - set up a VPN back
+# to the home network, then automount files. 
+
+mpl="/mnt/net"                  # mount points location: alternately "/network/"
+
+declare -A network_locations=(
+
+    ["networkstorage:/massivestorage/amusant"]="$mpl/amusant"
+    ["networkstorage:/massivestorage/system"]="$mpl/system"
+    ["networkstorage:/massivestorage/libraries"]="$mpl/libraries"
+    ["networkstorage:/massivestorage/private"]="$mpl/private"
+    ["networkstorage:/massivestorage/settings"]="$mpl/settings"
+
+    ["dev:libraries"]="$mpl/dev"
+
+)
+
+usr=`whoami`
+
+OPTIONS="-o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3"
+
+# allow_root:   otherwise any command invoking sudo and involving the sshfs 
+# directory will fail.  This requires an option to be set in /etc/fuse.conf:
+# user_allow_other.
+
+# reconnect,ServerAliveInterval=15,ServerAliveCountMax=3: this is supposed to 
+# help the drive respond to a lost connection, and either give an IO error
+# (after trying 3 times at 15 second intervals to find the network drive) or
+# reconnect to the drive.  It should prevent programs from hanging (like MS
+# Code was doing)
+# https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect
+
+[ -f /usr/bin/sshfs ] || sudo apt install sshfs || sudo xbps-install -S sshfs
+
+if ! grep -i "^user_allow_other" /etc/fuse.conf
+    then echo "user_allow_other" | sudo tee -a /etc/fuse.conf; fi
+
+
+configureconnections()
+{
+
+  for mt in ${!network_locations[@]};do
+
+  mp="${network_locations[$mt]}"
+
+  [ -d $mp ] || mkdir -p $mp || { sudo mkdir -p $mp && sudo chown $usr:$usr $mp; }
+
+
+  srv="${mt%%:*}"                                                  # server name
+
+  [ -f /home/$usr/.ssh/id_rsa ] || ssh-keygen   # create ssh key, only if needed
+
+  auth=`ssh $usr@$srv -o PasswordAuthentication=no echo 0 2>/dev/null || echo 1`
+
+  [ "$auth" == '1' ] && ssh-copy-id $usr@$srv # if password is needed upload key
+
+  done
+
+}
+
+mountall()
+{
+
+
+  for mt in ${!network_locations[@]};do
+
+    echo "-----------------------------------------------------------------------"
+
+    if mount | grep "$mt"; then echo "$mt already mounted" && continue; fi
+
+    mp="${network_locations[$mt]}"                             # local mount point
+
+    srv="${mt%%:*}"                                                  # server name
+
+    echo "network mount location: $mt"
+    echo "remote server: $srv"
+    echo "local mount point: $mp"
+
+    sshfs $OPTIONS "$mt" "$mp"
+
+  done
+
+  echo   "-----------------------------------------------------------------------"
+
+}
+
+unmountall()
+{
+
+  for mt in ${!network_locations[@]};do
+
+  mp="${network_locations[$mt]}"
+
+  fusermount3 -u $mp
+
+  done
+
+}
+
+
+case $1 in
+
+    mount)
+    mountall
+    ;;
+
+    umount)
+    unmountall
+    ;;
+
+    *)
+    echo "unknown option"
+    echo "use:"
+    echo "remotes [mount | umount]"
+    ;;
+
+esac
+

@@ -108,7 +108,6 @@ mkdir -pv $HOME/system/wallpaper/lockscreens/
 cp -v s/lockscreen.surf.png $HOME/system/wallpaper/lockscreens/surf.png
 
 # set up network mounts - may need user input, so do last
-INSTALL s/net/mount_network_drives.sh   "/usr/local/bin/mount_network_drives.sh"
-bash /usr/local/bin/mount_network_drives.sh 
+INSTALL s/net/remotes "/usr/local/bin/remotes" && remotes mount 
 
 echo "done. press enter to reboot now. > "; read; sudo reboot
