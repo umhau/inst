@@ -1,7 +1,11 @@
 #!/bin/bash
 
-mpl="/mnt/net"                  # mount_points_location: alternately "/network/"
-me=`whoami`
+# This should only require sudo on the first use. After that, nothing requires
+# more than user permissions.  Hence, suitable for the i3config file.
+
+## define network mounts ## ----------------------------------------------------
+
+mpl="/mnt/net"                  # mount points location: alternately "/network/"
 
 declare -A network_locations=(
 
@@ -15,33 +19,66 @@ declare -A network_locations=(
 
 )
 
+
+## ensure system is properly configured ## -------------------------------------
+
+[ -f /usr/bin/sshfs ] || sudo apt install sshfs || sudo xbps-install -S sshfs
+
+if ! grep -i "^user_allow_other" /etc/fuse.conf
+then echo "user_allow_other" | sudo tee -a /etc/fuse.conf; fi
+
+
+## set relevant variables ## ---------------------------------------------------
+
+usr=`whoami`
+
 OPTIONS="-o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3"
 
-# allow_root:   otherwise any command invoking sudo and involving the sshfs 
-# directory will fail.
 
-# reconnect,ServerAliveInterval=15,ServerAliveCountMax=3: this is supposed to 
-# help the drive respond to a lost connection, and either give an IO error
-# (after trying 3 times at 15 second intervals to find the network drive) or
-# reconnect to the drive.  It should prevent programs from hanging (like MS
-# Code was doing)
-# https://serverfault.com/questions/6709/sshfs-mount-that-survives-disconnect
+## fix local mount points ## ---------------------------------------------------
 
 for mt in ${!network_locations[@]};do
 
+  mp="${network_locations[$mt]}"
+
+  [ -d $mp ] || mkdir -p $mp || sudo mkdir -p $mp && sudo chown $usr:$usr $mp
+
+done
+
+
+## ensure access to network systems ## -----------------------------------------
+
+for mt in ${!network_locations[@]};do
+
+  srv="${mt%%:*}"                                                  # server name
+
+  [ -f /home/$usr/.ssh/id_rsa ] || ssh-keygen   # create ssh key, only if needed
+
+  auth=`ssh $usr@$srv -o PasswordAuthentication=no echo 0 2>/dev/null || echo 1`
+
+  [ "$auth" == '1' ] && ssh-copy-id $usr@$srv # if password is needed upload key
+
+done
+
+
+## mount network drives ## -----------------------------------------------------
+
+for mt in ${!network_locations[@]};do
+
+  echo "-----------------------------------------------------------------------"
+
+  if mount | grep "$mt"; then echo "$mt already mounted" && continue; fi
+
   mp="${network_locations[$mt]}"                             # local mount point
-  # if the folder is missing, create it; if the user cannot, use sudo
-  [ -d $mp ] || mkdir -p $mp || sudo mkdir -p $mp && sudo chown $me:$me $mp
 
+  srv="${mt%%:*}"                                                  # server name
 
-  srv="${mt%%:*}"                                      # extract the server name
-  auth=`ssh $me@$srv -o PasswordAuthentication=no echo 0 2>/dev/null || echo 1`
-  [ -f /home/$me/.ssh/id_rsa ] || ssh-keygen    # create ssh key, only if needed
-  [ "$auth" == '1' ] && ssh-copy-id $me@$srv # if password is needed, upload key
-
-  if mount | grep "$mt"; then continue; fi                     # already mounted
+  echo "network mount location: $mt"
+  echo "remote server: $srv"
+  echo "local mount point: $mp"
 
   sshfs $OPTIONS "$mt" "$mp"
 
 done
 
+echo   "-----------------------------------------------------------------------"
