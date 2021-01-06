@@ -25,7 +25,7 @@ case $osvers in
     ;;
 esac
 
-INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
+
 
 bash s/autologin.$osvers.sh  # do this early, b/c the void version requires tty2
 
@@ -43,7 +43,12 @@ bash s/git_config.sh                                  # set global git variables
 
 ## SYSTEM CONSTRUCTION ## --------------------------------------------------- ##
 
+INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
+# COPY()          { sudo cp -rv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
+
 INSTALL s/nanorc                                                 "$HOME/.nanorc"
+sudo cp -rv s/geany "$HOME/.config/" && \
+  sudo chown -v `whoami`:`whoami` $HOME/.config/geany
 INSTALL s/bashrc.$osvers                                         "$HOME/.bashrc"
 INSTALL s/vimrc                                                   "$HOME/.vimrc"
 INSTALL  s/xinitrc                                              "$HOME/.xinitrc"
@@ -91,15 +96,19 @@ mkdir -pv $HOME/.config/vlc; sudo install -Dv s/vlcrc       "$HOME/.config/vlc/"
 sudo install -Dv s/wallpaper.sh    "$HOME/system/wallpaper/wallpaper_changer.sh"
 
 # put a menu that organizes and lists programs down in the tray
-git clone https://github.com/trizen/menutray.git
-sudo install menutray/menutray /usr/local/bin/
+# git clone https://github.com/trizen/menutray.git
+sudo install s/menutray/menutray /usr/local/bin/
 mkdir -p /home/`whoami`/.config/menutray
-sudo install -v menutray/schema.pl /home/`whoami`/.config/menutray/
+sudo install -v s/menutray/schema.pl /home/`whoami`/.config/menutray/
 
 # multimonitor lock screen | dependencies: imagemagick i3lock
 sudo install -v s/i3lock-mm /usr/local/bin/;
 sudo chmod -v +x /usr/local/bin/i3lock-mm
 mkdir -pv $HOME/system/wallpaper/lockscreens/
 cp -v s/lockscreen.surf.png $HOME/system/wallpaper/lockscreens/surf.png
+
+# set up network mounts - may need user input, so do last
+INSTALL s/net/mount_network_drives.sh   "/usr/local/bin/mount_network_drives.sh"
+bash /usr/local/bin/mount_network_drives.sh 
 
 echo "done. press enter to reboot now. > "; read; sudo reboot
