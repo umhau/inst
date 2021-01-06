@@ -18,6 +18,7 @@ https://wiki.voidlinux.org/Post_Installation
 - [ ] put most of the information on a second tty.  errors on one, verbosity on 
       another.  1>/dev/tty3, 2>/dev/tty4, etc.
 - [ ] install a proper ntp daemon. See: https://wiki.voidlinux.org/NTP
+- [ ] run the package installation as root - maybe even the whole thing. solves the timeout issue when tons of stuff gets installed.
 
 ## file organization
 - [ ] put the inst folder this github repo represents into the ~/system folder.
