@@ -2,7 +2,7 @@
 
 # This should only require sudo on the first use. After that, nothing requires
 # more than user permissions.  Hence, suitable for the i3config file.
-
+set -v
 ## define network mounts ## ----------------------------------------------------
 
 mpl="/mnt/net"                  # mount points location: alternately "/network/"
@@ -41,7 +41,7 @@ for mt in ${!network_locations[@]};do
 
   mp="${network_locations[$mt]}"
 
-  [ -d $mp ] || mkdir -p $mp || sudo mkdir -p $mp && sudo chown $usr:$usr $mp
+  [ -d $mp ] || mkdir -p $mp || { sudo mkdir -p $mp && sudo chown $usr:$usr $mp; }
 
 done
 
