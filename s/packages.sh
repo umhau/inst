@@ -87,9 +87,9 @@ font-spleen                                          # nice font for development
 lyx lyx-common fonts-lyx          # lyx (wysiwyg doc + math, easier than latex?)
 pandoc                                              # document format conversion
 
-biber                                                 # for latex bibliographies
+biber texlive-bibtexextra                                 # latex bibliographies
 texworks-scripting-lua texworks-scripting-python texworks             # texworks
-texlive texlive-xetex texlive-extra-utils texlive-latexextra texlive-PythonTeX
+texlive-full texlive-extra-utils                                       # texlive
 '--install-suggests texstudio'  texstudio                            # texstudio
 
 sagemath sagemath-common sagemath-doc sagemath-jupyter   # all-in-one math suite
