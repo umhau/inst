@@ -1,0 +1,5 @@
+   $ ar x brave.deb >/dev/null
+   $ tar -xf data.tar.*
+   $ sudo cp -r opt/ usr/ etc/ /
+
+If I remember correctly, brave automatically have the correct paths setup, so `brave-browser-stable` is the your $PATH. Otherwise you should symlink the executable which should be in `/opt/brave.com/` or `/usr/share/brave/`
