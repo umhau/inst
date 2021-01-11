@@ -34,7 +34,7 @@ ledger hledger                                                      # accounting
 
 alsa-base alsamixer alsa-utils pulseaudio                     # sound management
 
-htop nload iotop dstat atop ncdu pv                            # system monitors
+htop nload iotop dstat atop ncdu pv powertop                   # system monitors
 zenity                                                   # display popup dialogs
 xbanish                                          # hide mouse cursor when typing
 flameshot scrot maim                                          # screenshot tools
