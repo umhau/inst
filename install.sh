@@ -85,7 +85,8 @@ sudo install -Dv s/pdfjam                                "/usr/local/bin/pdfjam"
 sudo install -Dv s/print_efficiently.2.sh  "/usr/local/bin/print_efficiently.sh"
 sudo install -Dv s/print_efficiently_quickly.sh  "/usr/local/bin/print_efficiently_quickly.sh"
 
-## AESTHETIC MODIFICATIONS ## ----------------------------------------------- ##
+# change virtualbox default virtual machine folder
+vboxmanage setproperty machinefolder /home/`whoami`/system/virtualmachines
 
 mkdir -pv $HOME/system/wallpaper/lockscreens/
 
