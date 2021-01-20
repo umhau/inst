@@ -48,8 +48,12 @@ configureconnections()
 
   mp="${network_locations[$mt]}"
 
-  [ -d $mp ] || mkdir -p $mp || { sudo mkdir -p $mp && sudo chown $usr:$usr $mp; }
-
+  if [ ! -d $mp ]
+  then
+    echo "$mp is missing: creating it now"
+    # mkdir -p $mp ||
+    sudo mkdir -p $mp && sudo chown $usr:$usr $mp
+  fi
 
   srv="${mt%%:*}"                                                  # server name
 
@@ -105,6 +109,10 @@ unmountall()
 
 case $1 in
 
+    setup)
+    configureconnections
+    ;;
+
     mount)
     mountall
     ;;
@@ -116,7 +124,7 @@ case $1 in
     *)
     echo "unknown option"
     echo "use:"
-    echo "remotes [mount | umount]"
+    echo "remotes [mount | umount | setup]"
     ;;
 
 esac
