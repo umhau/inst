@@ -25,7 +25,7 @@ case $osvers in
     ;;
 esac
 
-
+if [ "$osvers" == "void" ] && tty | grep -q 'tty1'; then echo "use tty2!"; exit; fi; fi
 
 bash s/autologin.$osvers.sh  # do this early, b/c the void version requires tty2
 
