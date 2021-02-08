@@ -29,7 +29,7 @@ esac
 
 bash s/autologin.$osvers.sh  # do this early, b/c the void version requires tty2
 
-bash s/installpkgs.$osvers.sh                  # install each package separately
+su -c 'bash s/installpkgs.$osvers.sh' root    # install with su to avoid timeout
 
 bash s/femtolisp.sh                           # grab an awesome lisp interpreter
 
