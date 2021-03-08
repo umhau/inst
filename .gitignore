@@ -5,3 +5,4 @@ wallpaper
 *swp
 s/*swp
 .fuse*
+secrets/wpa_supplicant.conf

@@ -6,7 +6,7 @@
 # This could turn into something much more complex later on - set up a VPN back
 # to the home network, then automount files. 
 
-mpl="/mnt/net"                  # mount points location: alternately "/network/"
+mpl="/net"                  # mount points location: alternately "/network/"
 
 declare -A network_locations=(
 
@@ -46,18 +46,23 @@ configureconnections()
 
   for mt in ${!network_locations[@]};do
 
-  mp="${network_locations[$mt]}"
+    mp="${network_locations[$mt]}"
 
-  [ -d $mp ] || mkdir -p $mp || { sudo mkdir -p $mp && sudo chown $usr:$usr $mp; }
+    # [ -d $mp ] || mkdir -p $mp || { sudo mkdir -p $mp && sudo chown $usr:$usr $mp; }
 
+    # create the mount point directory
+    sudo mkdir -p $mp && sudo chown $usr:$usr $mp
 
-  srv="${mt%%:*}"                                                  # server name
+    # server name
+    srv="${mt%%:*}"
 
-  [ -f /home/$usr/.ssh/id_rsa ] || ssh-keygen   # create ssh key, only if needed
+    # create ssh key, only if needed
+    [ -f /home/$usr/.ssh/id_rsa ] || ssh-keygen 
 
-  auth=`ssh $usr@$srv -o PasswordAuthentication=no echo 0 2>/dev/null || echo 1`
+    auth=`ssh $usr@$srv -o PasswordAuthentication=no echo 0 2>/dev/null || echo 1`
 
-  [ "$auth" == '1' ] && ssh-copy-id $usr@$srv # if password is needed upload key
+    # if password is needed upload key
+    [ "$auth" == '1' ] && ssh-copy-id $usr@$srv 
 
   done
 
@@ -113,10 +118,14 @@ case $1 in
     unmountall
     ;;
 
+    configure)
+    configureconnections
+    ;;
+
     *)
     echo "unknown option"
     echo "use:"
-    echo "remotes [mount | umount]"
+    echo "remotes [mount | umount | configure]"
     ;;
 
 esac

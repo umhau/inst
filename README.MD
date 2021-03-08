@@ -12,6 +12,21 @@ To perform a full system configuration, run the install script corresponding to 
 Many of these things are discussed on the void wiki. 
 https://wiki.voidlinux.org/Post_Installation
 
+## network
+
+once I have a working VPN pointing back to my home network, there's a lot of things that can be improved and simplified. 
+
+ - [ ] synchronize configurations with the main server, e.g. wifi passwords & SSIDs.
+
+ - [ ] zero or thin clients will be possible: make the network drive the primary storage that gets mounted whenever the network connection goes up. Thus, ~/libraries (etc) are mount points for the network library.
+
+    - local storage could use a system link from e.g. ~/.libraries to ~/libraries, so that there's a fallback when the internet is down.  There might be some software out there that lets me cache anything recently used on the local drive, given the space usage is ok.
+
+### PXEN will allow for generalized zero/thin-clients. 
+
+- There is a system for sharing USB devices over the network; if this is included on all guests, then it might be possible to access any USB from any system. http://usbip.sourceforge.net/
+
+
 ## installation
 - [ ] ensure that I can rerun this tool repeatedly, without damage. this allows 
       me to continuously edit a preexisting OS installation.
