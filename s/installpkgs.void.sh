@@ -12,6 +12,6 @@ for package in "${PK[@]}" ; do
 
     echo "Installing package: $package"
     
-    sudo xbps-install -y "$package" > /dev/tty8; 
+    sudo xbps-install -y "$package" # | sudo tee -a /dev/tty8; 
 
 done

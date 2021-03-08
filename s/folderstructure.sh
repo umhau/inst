@@ -6,6 +6,10 @@ netmount='/net'
 homedir="/home/`whoami`"
 INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
 
+username=`whoami`
+sudo mkdir -p $netmount ; sudo chown -R $username:$username $netmount
+
+
 # create new folder system
 mkdir -vp $homedir/system
 mkdir -vp $homedir/system/unsorted

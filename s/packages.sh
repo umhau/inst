@@ -45,7 +45,7 @@ xournal
 
 linux-firmware linux-firmware-intel linux-firmware-network       # wifi firmware
 wpa_gui wpa_supplicant wireless_tools iwctl iwd                # wifi management
-zenmap macchanger ipcalc                                      # networking tools
+zenmap macchanger ipcalc inetutils-ifconfig                   # networking tools
 
 deluge deluge-gtk                                                   # bittorrent
 youtube-dl                                         # download videos from online

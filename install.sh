@@ -22,27 +22,32 @@ if tty | grep -q 'tty1'; then echo "must use tty2!"; exit; fi
 case $osvers in
 
   ubuntu)
-    echo -n "installing system with Ubuntu variations"
+    echo "installing system with Ubuntu variations"
     ;;
 
   void)
-    echo -n "installing system with void linux variations"
+    echo "installing system with void linux variations"
     ;;
 
   openbsd)
-    echo -n "OpenBSD is not configured yet. Please come back later." && exit
+    echo "OpenBSD is not configured yet. Please come back later." && exit
     ;;
 
   freebsd)
-    echo -n "New hotness isn't here yet. Try again later." && exit
+    echo "New hotness isn't here yet. Try again later." && exit
     ;;
 
   *)
-    echo -n "provide a correct OS version to the script" && exit
+    echo "provide a correct OS version to the script" && exit
     ;;
 
 esac
 
+echo "available wireless interfaces:"
+iw dev | awk '$1=="Interface"{print $2}'
+echo -n "enter the interface name to activate automatically > "
+read wirelessinterface ; wirelessinterface=$(echo $wirelessinterface | xargs)
+echo "confirm interface $wirelessinterface [enter/ctrl-c] > "
 
 ## -- [ package & software installation ] ----------------------------------- ##
 
@@ -52,9 +57,9 @@ bash s/femtolisp.sh                           # grab an awesome lisp interpreter
 
 # set up compact printing script tools
 sudo install -Dv s/printing/pdfjam                       "/usr/local/bin/pdfjam"
-sudo install -Dv s/print_efficiently.2.sh           "/usr/local/bin/pdfprint.sh"
+sudo install -Dv s/printing/print_efficiently.2.sh  "/usr/local/bin/pdfprint.sh"
 
-# st and stterm need to have their names reconciled for my i3config script
+st and stterm need to have their names reconciled for my i3config script
 [ "$osvers" == "ubuntu" ] && sudo install -Dv /usr/bin/stterm /usr/bin/st
 
 bash s/menutray/menutray.inst.sh # a tray menu that organizes and lists programs
@@ -63,8 +68,11 @@ bash s/menutray/menutray.inst.sh # a tray menu that organizes and lists programs
 ## -- [ system construction ] ----------------------------------------------- ##
 # the system won't function properly without this stuff
 
+sudo install s/rc.local /etc/rc.local           # the startup programs pre-login
+sudo sed -i "s/wlp3s0/$wirelessinterface/g" /etc/rc.local     # use correct interface
+
 bash s/autologin.$osvers.sh  # do this early, b/c the void version requires tty2
-[ "$osvers" == "void" ] && s/void_daemons.sh      # e.g. ssh, print server, etc.
+[ "$osvers" == "void" ] && bash s/void_daemons.sh       # ssh, print server, etc
 INSTALL  s/xinitrc "$HOME/.xinitrc"                                    # exec i3
 bash s/folderstructure.sh                               # this seems OS-agnostic
 bash s/sudo_reboot.sh                             # reboot without root password 
