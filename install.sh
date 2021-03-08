@@ -70,7 +70,7 @@ bash s/folderstructure.sh                               # this seems OS-agnostic
 bash s/sudo_reboot.sh                             # reboot without root password 
 bash s/sudo_backlight.sh                                 # control the backlight
 bash s/multimonitor_lock_screen.sh                                 # lock screen
-
+vboxmanage setproperty machinefolder /home/`whoami`/system/virtualmachines
 
 ## -- [ network interactions ] ---------------------------------------------- ##
 

@@ -48,10 +48,12 @@ configureconnections()
 
     mp="${network_locations[$mt]}"
 
-    # [ -d $mp ] || mkdir -p $mp || { sudo mkdir -p $mp && sudo chown $usr:$usr $mp; }
-
-    # create the mount point directory
+  if [ ! -d $mp ]
+  then
+    echo "$mp is missing: creating it now"
+    # mkdir -p $mp ||
     sudo mkdir -p $mp && sudo chown $usr:$usr $mp
+  fi
 
     # server name
     srv="${mt%%:*}"
