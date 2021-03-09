@@ -26,6 +26,10 @@ once I have a working VPN pointing back to my home network, there's a lot of thi
 
 - There is a system for sharing USB devices over the network; if this is included on all guests, then it might be possible to access any USB from any system. http://usbip.sourceforge.net/
 
+### synchronized files
+
+- ssh / tcp connections list
+- wpa_supplicant config with passwords
 
 ## installation
 - [ ] ensure that I can rerun this tool repeatedly, without damage. this allows 
