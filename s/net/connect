@@ -1,0 +1,24 @@
+#!/bin/bash
+
+declare -a connections=(
+
+    'ps   | pivot server                              | ssh mal@192.168.1.75'
+    'dk   | admin desktop                             | ssh f@192.168.1.80'
+
+)
+
+# source ./connect.conf || { echo "config not found!" ; exit ; }
+
+for connection in "${connections[@]}"; do
+
+    IFS='|' read shorthand description ssh_cmd <<< "$connection"
+
+    shorthand=$( echo "$shorthand" | xargs )
+    description=$( echo "$description" | xargs )
+    ssh_cmd=$( echo "$ssh_cmd" | xargs )
+
+    [ -z "$1" ] && echo -e "\t$shorthand\t$description" && continue
+
+    [ "$1" == "$shorthand" ] && echo "connecting to $description" && $ssh_cmd
+
+done
