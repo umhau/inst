@@ -57,7 +57,7 @@ echo "XDG_PICTURES_DIR=\"$homedir/unsorted\""                             >> $TP
 echo "XDG_DOWNLOAD_DIR=\"$homedir/unsorted\""                             >> $TP
 echo "XDG_DESKTOP_DIR=\"$homedir/unsorted\""                              >> $TP
 sudo install -Dv $TP                               "/etc/xdg/user-dirs.defaults"
-INSTALL $TP                                   "$homedir/.config/user-dirs.defaults"
+sudo install -Dv $TP                       "$homedir/.config/user-dirs.defaults"
 
 # # alternate version, possibly ubuntu-specific, possibly an updated syntax
 # XR=/etc/xdg/user-dirs.defaults;XU=$homedir/.config/user-dirs.defaults;TP=/tmp/xdg.t

@@ -4,4 +4,4 @@
 # is inspired by Scheme, which in turn is a Lisp dialect). 
 
 cd ~/system/
-git clone https://github.com/JeffBezanson/femtolisp.git
+[ ! -d ./femtolisp ] && git clone https://github.com/JeffBezanson/femtolisp.git

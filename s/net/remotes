@@ -54,7 +54,7 @@ configureconnections()
     srv="${mt%%:*}"
 
     # create ssh key, only if needed
-    [ -f /home/$user/.ssh/id_rsa ] || ssh-keygen 
+    [ ! -f /home/$user/.ssh/id_rsa ] && ssh-keygen 
 
     auth=`ssh $user@$srv -o PasswordAuthentication=no echo 0 2>/dev/null || echo 1`
 
