@@ -7,7 +7,7 @@ homedir="/home/`whoami`"
 INSTALL()    { sudo install -Dv "$1" "$2"; sudo chown -v `whoami`:`whoami` $2; }
 
 username=`whoami`
-sudo mkdir -p $netmount ; sudo chown -R $username:$username $netmount
+sudo mkdir -p $netmount ; sudo chown -v $username:$username $netmount
 
 
 # create new folder system
@@ -77,14 +77,16 @@ sudo chown -Rv `whoami`:`whoami` $homedir/.config/gtk-3.0
 mkdir -pv $homedir/.config/gtk-3.0/
 G3B=$homedir/.config/gtk-3.0/bookmarks
 
-echo "file://$homedir/unsorted unsorted"                            > $G3B
-echo "file://$homedir/libraries libraries"                         >> $G3B
-echo "file://$homedir/private private"                             >> $G3B
-echo "file://$homedir/system system"                               >> $G3B
-echo "file://$homedir/amusant amusant"                             >> $G3B
+echo "file://$homedir/unsorted unsorted"                                  > $G3B
+echo "file://$homedir/libraries libraries"                               >> $G3B
+echo "file://$homedir/private private"                                   >> $G3B
+echo "file://$homedir/system system"                                     >> $G3B
+echo "file://$homedir/amusant amusant"                                   >> $G3B
 
-# echo "file:///mnt/net/libraries  libraries"                            >> $G3B
-# echo "file:///mnt/net/intimate  intimate"                              >> $G3B
-# echo "file:///mnt/net/system  system"                                  >> $G3B
-# echo "file:///mnt/net/amusant  amusant"                                >> $G3B
-# echo "file:///mnt/net/settings  settings"                              >> $G3B
+echo "file://$netmount  share drive"                                    >> $G3B
+
+echo "file://$netmount/libraries  libraries"                            >> $G3B
+echo "file://$netmount/private  private"                                >> $G3B
+echo "file://$netmount/system  system"                                  >> $G3B
+echo "file://$netmount/amusant  amusant"                                >> $G3B
+echo "file://$netmount/settings  settings"                              >> $G3B

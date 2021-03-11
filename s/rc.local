@@ -4,7 +4,7 @@
 # (see /etc/runit/2).
 
 # this daemon runs the given script on every network event from wpa_supplicant
-( wpa_cli -a /etc/network/net_handler.sh ) &
+wpa_cli -B -a /etc/network/net_handler.sh
 
 # then start the wpa_supplicant
 # https://superuser.com/questions/469039/wpa-supplicant-for-dual-wlan

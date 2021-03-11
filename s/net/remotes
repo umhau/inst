@@ -20,8 +20,6 @@ declare -A network_locations=(
 
 )
 
-usr=`whoami`
-
 OPTIONS="-o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3"
 
 # allow_root:   otherwise any command invoking sudo and involving the sshfs 
@@ -37,7 +35,7 @@ OPTIONS="-o allow_root,reconnect,ServerAliveInterval=15,ServerAliveCountMax=3"
 
 [ -f /usr/bin/sshfs ] || sudo apt install sshfs || sudo xbps-install -S sshfs
 
-if ! grep -i "^user_allow_other" /etc/fuse.conf
+if ! grep -i "^user_allow_other" /etc/fuse.conf &>/dev/null
     then echo "user_allow_other" | sudo tee -a /etc/fuse.conf; fi
 
 
@@ -48,23 +46,20 @@ configureconnections()
 
     mp="${network_locations[$mt]}"
 
-  if [ ! -d $mp ]
-  then
-    echo "$mp is missing: creating it now"
-    # mkdir -p $mp ||
-    sudo mkdir -p $mp && sudo chown $usr:$usr $mp
-  fi
+    user=`whoami`
+
+    sudo mkdir -pv $mp && sudo chown -v $user:$user $mp
 
     # server name
     srv="${mt%%:*}"
 
     # create ssh key, only if needed
-    [ -f /home/$usr/.ssh/id_rsa ] || ssh-keygen 
+    [ -f /home/$user/.ssh/id_rsa ] || ssh-keygen 
 
-    auth=`ssh $usr@$srv -o PasswordAuthentication=no echo 0 2>/dev/null || echo 1`
+    auth=`ssh $user@$srv -o PasswordAuthentication=no echo 0 2>/dev/null || echo 1`
 
     # if password is needed upload key
-    [ "$auth" == '1' ] && ssh-copy-id $usr@$srv 
+    [ "$auth" == '1' ] && ssh-copy-id $user@$srv 
 
   done
 

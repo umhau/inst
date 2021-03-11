@@ -37,6 +37,7 @@ case "$1" in
             SBTN|SLPB)
 		    # suspend-to-ram
 		    logger "Sleep Button pressed: $2, suspending..."
+            
 		    zzz
 		    ;;
             *)      logger "ACPI action undefined: $2" ;;

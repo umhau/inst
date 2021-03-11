@@ -27,15 +27,16 @@
 case "$2" in
 CONNECTED)
 
-    # do stuff on connect
+    # do stuff on connect; wait 10 sec for ipv4 address to settle
+    sleep 10
 
     # if connected to the home network wifi, reconnect the network drives
     # ( [ "$WPA_ID" == 'FiOS-UXB2O' ] && remotes mount ) &
 
     # try to connect the remotes, no matter what the network is
     remotes mount &
-
-    # try to update machine date & time; first wait for connection to settle
+    
+    # try to update machine date & time
     ntpdate pool.ntp.org &
 
     # experiment to see how to id the wired home network.

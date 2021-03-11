@@ -1,6 +1,0 @@
-wifi config
-
-
-# TODO: include supplicant.conf in the git repo, but encrypt it.
-if [ -f s/wpa_supplicant.conf ];then
-    sudo install -Dv s/wpa_supplicant.conf "/etc/wpa_supplicant/"; fi

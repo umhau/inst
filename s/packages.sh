@@ -11,7 +11,8 @@ i3lock                                                              # lockscreen
 feh                                                             # set background
 i3status                                                            # status bar
 j4-dmenu-desktop rofi xlunch                                     # app launchers
-perl gtk2-perl perl-data-dump perl-linux-desktopfiles            # menutray deps
+perl perl-Gtk3 perl-Data-Dump perl-Linux-DesktopFiles            # menutray deps
+ntp                                                   # synchronize system clock
 
 xset                                           # prevent screen from turning off
 font-awesome5                                          # symbolic font for icons
@@ -44,8 +45,9 @@ galculator                                                    # popup calculator
 xournal
 
 linux-firmware linux-firmware-intel linux-firmware-network       # wifi firmware
-wpa_gui wpa_supplicant wireless_tools iwctl iwd                # wifi management
-zenmap macchanger ipcalc inetutils-ifconfig                   # networking tools
+wpa_gui wpa_supplicant wireless_tools iwctl iwd            # wifi gui management
+zenmap macchanger ipcalc                                      # networking tools
+inetutils-ifconfig                                           # gives me ifconfig
 
 deluge deluge-gtk                                                   # bittorrent
 youtube-dl                                         # download videos from online
