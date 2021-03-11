@@ -32,6 +32,7 @@ fswebcam                                                                # webcam
 nomacs                                                           # image viewers
 libreoffice                                                        # office docs
 inkscape gimp                                                 # graphics editors
+ebook-tools            # for ebook-convert, for epub -> mobi, for kindle reading
 
 alsa-base alsamixer alsa-utils pulseaudio                     # sound management
 
