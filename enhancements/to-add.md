@@ -26,11 +26,13 @@ https://news.ycombinator.com/item?id=24702106 I wrote this simple program to rea
 
 https://github.com/anderspitman/awesome-tunneling The purpose of this list is to track and compare tunneling solutions. This is primarily targeted toward self-hosters and developers who want to do things like exposing a local webserver via a public domain name, with automatic HTTPS.
 
-### RSS
+### RSS / IRC / communication
 
 https://www.freshrss.org/ (For the recommendation, see here: https://news.ycombinator.com/item?id=24539771) A better RSS reader, that I can host and that won't be dependent on any particular desktop computer.
 
 https://newsboat.org/ Newsboat is an RSS/Atom feed reader for the text console. Even better (maybe?) than freshrss, since I can use it with a terminal. Could be nice to host it on my system and be able to access it from anywhere.
+
+https://tools.suckless.org/ii/ ii is a minimalist FIFO and filesystem-based IRC client. It creates an irc directory tree with server, channel and nick name directories. In every directory a FIFO in file and a normal out file is created.
 
 ## aesthetic
 
