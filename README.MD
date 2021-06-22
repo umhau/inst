@@ -12,6 +12,12 @@ To perform a full system configuration, run the install script corresponding to 
 Many of these things are discussed on the void wiki. 
 https://wiki.voidlinux.org/Post_Installation
 
+## program configs
+
+ - [ ] VLC preferences: 
+    * allow multiple instances
+    * increase disk cache to ~10 seconds: helps when playing over remote filesystems
+
 ## network
 
 once I have a working VPN pointing back to my home network, there's a lot of things that can be improved and simplified. 
