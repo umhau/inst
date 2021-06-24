@@ -14,6 +14,8 @@ j4-dmenu-desktop rofi xlunch                                     # app launchers
 perl perl-Gtk3 perl-Data-Dump perl-Linux-DesktopFiles            # menutray deps
 ntp                                                   # synchronize system clock
 
+freerdp xfreerdp            # remote desktop tool for accessing windows machines
+
 xset                                           # prevent screen from turning off
 font-awesome5                                          # symbolic font for icons
 qt5ct lxappearance                                            # theme management
