@@ -21,6 +21,8 @@ alias hlp='grep alias ~/.bashrc && grep function ~/.bashrc'
 
 function mc { mkdir -p "$1"; cd "$1"; }
 function b { grep -a "$1" ~/.bash_history; }
+function prepend() { while read line; do echo "${1}${line}"; done; }
+function append() { while read line; do echo "${line}${1}"; done; }
 
 # save bash history in tmux shells (https://askubuntu.com/a/339925)
 export HISTCONTROL=ignoredups:erasedups
